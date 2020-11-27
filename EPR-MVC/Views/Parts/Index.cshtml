@@ -1,0 +1,43 @@
+﻿@model IEnumerable<EPR_MVC.Models.PartsViewModel>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Запчасти</h2>
+
+<div class="container" style="width:60%;margin-top:2%;">
+    @if (Model != null)
+    {
+        <table class="table table-striped">
+            <tr>
+                <th>Code</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Partnumber</th>
+                <th>Nameplate</th>
+                <th>Оборудование</th>
+                <th>Поставщик</th>
+                <th>OEM</th>
+                <th>Производитель</th>
+                <th>Компания UzAuto</th>
+            </tr>
+            <tbody>
+                @foreach (var part in Model)
+                {
+                    <tr>
+                        <td>@part.Code </td>
+                        <td>@part.Name </td>
+                        <td>@part.Description </td>
+                        <td>@part.PartNumber </td>
+                        <td>@part.NamePlate </td>
+                        <td>@part.MachineName </td>
+                        <td>@part.SupplierName </td>
+                        <td>@part.OEMName </td>
+                        <td>@part.ManufacturerName </td>
+                        <td>@part.UzAutoSupplierName </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

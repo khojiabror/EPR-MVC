@@ -1,0 +1,1017 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DBEPRModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="LOGS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Form" Type="varchar" MaxLength="50" />
+          <Property Name="Operation" Type="text" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="DateTime" Type="datetime" />
+          <Property Name="IP" Type="varchar" MaxLength="15" />
+          <Property Name="Line" Type="varchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="MACHINES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="50" />
+          <Property Name="UzAutoSupplierID" Type="int" Nullable="false" />
+          <Property Name="ManufacturerID" Type="int" Nullable="false" />
+          <Property Name="Lifespan" Type="varchar" MaxLength="10" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="InstalledDate" Type="date" />
+          <Property Name="TypeID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MACHINETYPES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="25" />
+          <Property Name="Description" Type="text" />
+        </EntityType>
+        <EntityType Name="MANUFACTURERS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Country" Type="varchar" MaxLength="15" />
+          <Property Name="Address" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="30" />
+          <Property Name="ContactPerson" Type="varchar" MaxLength="15" />
+          <Property Name="TelephoneNumber" Type="varchar" MaxLength="20" />
+          <Property Name="Website" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OEMS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Country" Type="varchar" MaxLength="15" />
+          <Property Name="Address" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="30" />
+          <Property Name="ContactPerson" Type="varchar" MaxLength="15" />
+          <Property Name="TelephoneNumber" Type="varchar" MaxLength="20" />
+          <Property Name="Website" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PARTS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="text" />
+          <Property Name="PartNumber" Type="varchar" MaxLength="15" />
+          <Property Name="Photo" Type="image" />
+          <Property Name="UzAutoSupplierID" Type="int" Nullable="false" />
+          <Property Name="NamePlate" Type="varchar" MaxLength="50" />
+          <Property Name="ManufacturerID" Type="int" Nullable="false" />
+          <Property Name="SupplierID" Type="int" Nullable="false" />
+          <Property Name="OEMID" Type="int" Nullable="false" />
+          <Property Name="MachineID" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBEPR.dbo.PERMISSIONROLES' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="PERMISSIONROLES">
+          <Key>
+            <PropertyRef Name="PermissionID" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="PermissionID" Type="int" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PERMISSIONS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PermissionName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Model" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ROLES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="text" />
+          <Property Name="IsAdmin" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ROLEUSERS">
+          <Key>
+            <PropertyRef Name="RoleID" />
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="RoleID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SUPPLIERS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Country" Type="varchar" MaxLength="15" />
+          <Property Name="Address" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="30" />
+          <Property Name="ContactPerson" Type="varchar" MaxLength="15" />
+          <Property Name="TelephoneNumber" Type="varchar" MaxLength="20" />
+          <Property Name="Website" Type="varchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="USERS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="Question" Type="text" />
+          <Property Name="Answer" Type="varchar" MaxLength="20" />
+          <Property Name="IsOnline" Type="bit" />
+          <Property Name="UzautosupplierID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="USERSIMAGES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="Image" Type="image" />
+        </EntityType>
+        <EntityType Name="UZAUTOSUPPLIERS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="25" />
+          <Property Name="Country" Type="varchar" MaxLength="15" />
+          <Property Name="Address" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="30" />
+          <Property Name="ContactPerson" Type="varchar" MaxLength="15" />
+          <Property Name="TelephoneNumber" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <Association Name="FK__MACHINES__TypeID__73BA3083">
+          <End Role="MACHINETYPES" Type="Self.MACHINETYPES" Multiplicity="1" />
+          <End Role="MACHINES" Type="Self.MACHINES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MACHINETYPES">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MACHINES">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PARTS__MachineID__75A278F5">
+          <End Role="MACHINES" Type="Self.MACHINES" Multiplicity="1" />
+          <End Role="PARTS" Type="Self.PARTS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MACHINES">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PARTS">
+              <PropertyRef Name="MachineID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PARTS__manufactu__6754599E">
+          <End Role="MANUFACTURERS" Type="Self.MANUFACTURERS" Multiplicity="1" />
+          <End Role="PARTS" Type="Self.PARTS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MANUFACTURERS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PARTS">
+              <PropertyRef Name="ManufacturerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PARTS__oemid__693CA210">
+          <End Role="OEMS" Type="Self.OEMS" Multiplicity="1" />
+          <End Role="PARTS" Type="Self.PARTS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OEMS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PARTS">
+              <PropertyRef Name="OEMID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PARTS__supplieri__68487DD7">
+          <End Role="SUPPLIERS" Type="Self.SUPPLIERS" Multiplicity="1" />
+          <End Role="PARTS" Type="Self.PARTS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUPPLIERS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PARTS">
+              <PropertyRef Name="SupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__USERS__Uzautosupp">
+          <End Role="UZAUTOSUPPLIERS" Type="Self.UZAUTOSUPPLIERS" Multiplicity="1" />
+          <End Role="USERS" Type="Self.USERS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UZAUTOSUPPLIERS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="USERS">
+              <PropertyRef Name="UzautosupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LOGS_USERS">
+          <End Role="USERS" Type="Self.USERS" Multiplicity="1" />
+          <End Role="LOGS" Type="Self.LOGS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LOGS">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MACHINES_MANUFACTURERS1">
+          <End Role="MANUFACTURERS" Type="Self.MANUFACTURERS" Multiplicity="1" />
+          <End Role="MACHINES" Type="Self.MACHINES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MANUFACTURERS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MACHINES">
+              <PropertyRef Name="ManufacturerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MACHINES_UZAUTOSUPPLIERS1">
+          <End Role="UZAUTOSUPPLIERS" Type="Self.UZAUTOSUPPLIERS" Multiplicity="1" />
+          <End Role="MACHINES" Type="Self.MACHINES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UZAUTOSUPPLIERS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MACHINES">
+              <PropertyRef Name="UzAutoSupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Parts_Uzautosuppliers">
+          <End Role="UZAUTOSUPPLIERS" Type="Self.UZAUTOSUPPLIERS" Multiplicity="1" />
+          <End Role="PARTS" Type="Self.PARTS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UZAUTOSUPPLIERS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PARTS">
+              <PropertyRef Name="UzAutoSupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PERMISSIONROLES_PERMISSIONS">
+          <End Role="PERMISSIONS" Type="Self.PERMISSIONS" Multiplicity="1" />
+          <End Role="PERMISSIONROLES" Type="Self.PERMISSIONROLES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERMISSIONS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PERMISSIONROLES">
+              <PropertyRef Name="PermissionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PERMISSIONROLES_ROLES">
+          <End Role="ROLES" Type="Self.ROLES" Multiplicity="1" />
+          <End Role="PERMISSIONROLES" Type="Self.PERMISSIONROLES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROLES">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PERMISSIONROLES">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ROLEUSERS_ROLES">
+          <End Role="ROLES" Type="Self.ROLES" Multiplicity="1" />
+          <End Role="ROLEUSERS" Type="Self.ROLEUSERS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROLES">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ROLEUSERS">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ROLEUSERS_USERS">
+          <End Role="USERS" Type="Self.USERS" Multiplicity="1" />
+          <End Role="ROLEUSERS" Type="Self.ROLEUSERS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ROLEUSERS">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USERSIMAGES_USERS">
+          <End Role="USERS" Type="Self.USERS" Multiplicity="1" />
+          <End Role="USERSIMAGES" Type="Self.USERSIMAGES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="USERSIMAGES">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBEPRModelStoreContainer">
+          <EntitySet Name="LOGS" EntityType="Self.LOGS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MACHINES" EntityType="Self.MACHINES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MACHINETYPES" EntityType="Self.MACHINETYPES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MANUFACTURERS" EntityType="Self.MANUFACTURERS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OEMS" EntityType="Self.OEMS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PARTS" EntityType="Self.PARTS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PERMISSIONS" EntityType="Self.PERMISSIONS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ROLES" EntityType="Self.ROLES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SUPPLIERS" EntityType="Self.SUPPLIERS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USERSIMAGES" EntityType="Self.USERSIMAGES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UZAUTOSUPPLIERS" EntityType="Self.UZAUTOSUPPLIERS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PERMISSIONROLES" EntityType="Self.PERMISSIONROLES" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PERMISSIONROLES].[PermissionID] AS [PermissionID], 
+    [PERMISSIONROLES].[RoleId] AS [RoleId]
+    FROM [dbo].[PERMISSIONROLES] AS [PERMISSIONROLES]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ROLEUSERS" EntityType="Self.ROLEUSERS" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ROLEUSERS].[RoleID] AS [RoleID], 
+    [ROLEUSERS].[UserID] AS [UserID]
+    FROM [dbo].[ROLEUSERS] AS [ROLEUSERS]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__MACHINES__TypeID__73BA3083" Association="Self.FK__MACHINES__TypeID__73BA3083">
+            <End Role="MACHINETYPES" EntitySet="MACHINETYPES" />
+            <End Role="MACHINES" EntitySet="MACHINES" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PARTS__MachineID__75A278F5" Association="Self.FK__PARTS__MachineID__75A278F5">
+            <End Role="MACHINES" EntitySet="MACHINES" />
+            <End Role="PARTS" EntitySet="PARTS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PARTS__manufactu__6754599E" Association="Self.FK__PARTS__manufactu__6754599E">
+            <End Role="MANUFACTURERS" EntitySet="MANUFACTURERS" />
+            <End Role="PARTS" EntitySet="PARTS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PARTS__oemid__693CA210" Association="Self.FK__PARTS__oemid__693CA210">
+            <End Role="OEMS" EntitySet="OEMS" />
+            <End Role="PARTS" EntitySet="PARTS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PARTS__supplieri__68487DD7" Association="Self.FK__PARTS__supplieri__68487DD7">
+            <End Role="SUPPLIERS" EntitySet="SUPPLIERS" />
+            <End Role="PARTS" EntitySet="PARTS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__USERS__Uzautosupp" Association="Self.FK__USERS__Uzautosupp">
+            <End Role="UZAUTOSUPPLIERS" EntitySet="UZAUTOSUPPLIERS" />
+            <End Role="USERS" EntitySet="USERS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LOGS_USERS" Association="Self.FK_LOGS_USERS">
+            <End Role="USERS" EntitySet="USERS" />
+            <End Role="LOGS" EntitySet="LOGS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MACHINES_MANUFACTURERS1" Association="Self.FK_MACHINES_MANUFACTURERS1">
+            <End Role="MANUFACTURERS" EntitySet="MANUFACTURERS" />
+            <End Role="MACHINES" EntitySet="MACHINES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MACHINES_UZAUTOSUPPLIERS1" Association="Self.FK_MACHINES_UZAUTOSUPPLIERS1">
+            <End Role="UZAUTOSUPPLIERS" EntitySet="UZAUTOSUPPLIERS" />
+            <End Role="MACHINES" EntitySet="MACHINES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Parts_Uzautosuppliers" Association="Self.FK_Parts_Uzautosuppliers">
+            <End Role="UZAUTOSUPPLIERS" EntitySet="UZAUTOSUPPLIERS" />
+            <End Role="PARTS" EntitySet="PARTS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PERMISSIONROLES_PERMISSIONS" Association="Self.FK_PERMISSIONROLES_PERMISSIONS">
+            <End Role="PERMISSIONS" EntitySet="PERMISSIONS" />
+            <End Role="PERMISSIONROLES" EntitySet="PERMISSIONROLES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PERMISSIONROLES_ROLES" Association="Self.FK_PERMISSIONROLES_ROLES">
+            <End Role="ROLES" EntitySet="ROLES" />
+            <End Role="PERMISSIONROLES" EntitySet="PERMISSIONROLES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ROLEUSERS_ROLES" Association="Self.FK_ROLEUSERS_ROLES">
+            <End Role="ROLES" EntitySet="ROLES" />
+            <End Role="ROLEUSERS" EntitySet="ROLEUSERS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ROLEUSERS_USERS" Association="Self.FK_ROLEUSERS_USERS">
+            <End Role="USERS" EntitySet="USERS" />
+            <End Role="ROLEUSERS" EntitySet="ROLEUSERS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USERSIMAGES_USERS" Association="Self.FK_USERSIMAGES_USERS">
+            <End Role="USERS" EntitySet="USERS" />
+            <End Role="USERSIMAGES" EntitySet="USERSIMAGES" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DBEPRModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="LOG">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Form" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Operation" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="DateTime" Type="DateTime" Precision="3" />
+          <Property Name="IP" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Line" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="USER" Relationship="Self.FK_LOGS_USERS" FromRole="LOGS" ToRole="USERS" />
+        </EntityType>
+        <EntityType Name="MACHINE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UzAutoSupplierID" Type="Int32" Nullable="false" />
+          <Property Name="ManufacturerID" Type="Int32" Nullable="false" />
+          <Property Name="Lifespan" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="InstalledDate" Type="DateTime" Precision="0" />
+          <Property Name="TypeID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="MACHINETYPE" Relationship="Self.FK__MACHINES__TypeID__73BA3083" FromRole="MACHINES" ToRole="MACHINETYPES" />
+          <NavigationProperty Name="PARTS" Relationship="Self.FK__PARTS__MachineID__75A278F5" FromRole="MACHINES" ToRole="PARTS" />
+          <NavigationProperty Name="MANUFACTURER" Relationship="Self.FK_MACHINES_MANUFACTURERS1" FromRole="MACHINES" ToRole="MANUFACTURERS" />
+          <NavigationProperty Name="UZAUTOSUPPLIER" Relationship="Self.FK_MACHINES_UZAUTOSUPPLIERS1" FromRole="MACHINES" ToRole="UZAUTOSUPPLIERS" />
+        </EntityType>
+        <EntityType Name="MACHINETYPE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="MACHINES" Relationship="Self.FK__MACHINES__TypeID__73BA3083" FromRole="MACHINETYPES" ToRole="MACHINES" />
+        </EntityType>
+        <EntityType Name="MANUFACTURER">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Country" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ContactPerson" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="TelephoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Website" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="MACHINES" Relationship="Self.FK_MACHINES_MANUFACTURERS1" FromRole="MANUFACTURERS" ToRole="MACHINES" />
+          <NavigationProperty Name="PARTS" Relationship="Self.FK__PARTS__manufactu__6754599E" FromRole="MANUFACTURERS" ToRole="PARTS" />
+        </EntityType>
+        <EntityType Name="OEM">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Country" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ContactPerson" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="TelephoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Website" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="PARTS" Relationship="Self.FK__PARTS__oemid__693CA210" FromRole="OEMS" ToRole="PARTS" />
+        </EntityType>
+        <EntityType Name="PART">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PartNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="UzAutoSupplierID" Type="Int32" Nullable="false" />
+          <Property Name="NamePlate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ManufacturerID" Type="Int32" Nullable="false" />
+          <Property Name="SupplierID" Type="Int32" Nullable="false" />
+          <Property Name="OEMID" Type="Int32" Nullable="false" />
+          <Property Name="MachineID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="MACHINE" Relationship="Self.FK__PARTS__MachineID__75A278F5" FromRole="PARTS" ToRole="MACHINES" />
+          <NavigationProperty Name="MANUFACTURER" Relationship="Self.FK__PARTS__manufactu__6754599E" FromRole="PARTS" ToRole="MANUFACTURERS" />
+          <NavigationProperty Name="OEM" Relationship="Self.FK__PARTS__oemid__693CA210" FromRole="PARTS" ToRole="OEMS" />
+          <NavigationProperty Name="SUPPLIER" Relationship="Self.FK__PARTS__supplieri__68487DD7" FromRole="PARTS" ToRole="SUPPLIERS" />
+          <NavigationProperty Name="UZAUTOSUPPLIER" Relationship="Self.FK_Parts_Uzautosuppliers" FromRole="PARTS" ToRole="UZAUTOSUPPLIERS" />
+        </EntityType>
+        <EntityType Name="PERMISSION">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PermissionName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Model" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ROLES" Relationship="Self.PERMISSIONROLES" FromRole="PERMISSIONS" ToRole="ROLES" />
+        </EntityType>
+        <EntityType Name="ROLE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IsAdmin" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="PERMISSIONS" Relationship="Self.PERMISSIONROLES" FromRole="ROLES" ToRole="PERMISSIONS" />
+          <NavigationProperty Name="USERS" Relationship="Self.ROLEUSERS" FromRole="ROLES" ToRole="USERS" />
+        </EntityType>
+        <EntityType Name="SUPPLIER">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Country" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ContactPerson" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="TelephoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Website" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PARTS" Relationship="Self.FK__PARTS__supplieri__68487DD7" FromRole="SUPPLIERS" ToRole="PARTS" />
+        </EntityType>
+        <EntityType Name="USER">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="Question" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Answer" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IsOnline" Type="Boolean" />
+          <Property Name="UzautosupplierID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="LOGS" Relationship="Self.FK_LOGS_USERS" FromRole="USERS" ToRole="LOGS" />
+          <NavigationProperty Name="UZAUTOSUPPLIER" Relationship="Self.FK__USERS__Uzautosupp" FromRole="USERS" ToRole="UZAUTOSUPPLIERS" />
+          <NavigationProperty Name="USERSIMAGES" Relationship="Self.FK_USERSIMAGES_USERS" FromRole="USERS" ToRole="USERSIMAGES" />
+          <NavigationProperty Name="ROLES" Relationship="Self.ROLEUSERS" FromRole="USERS" ToRole="ROLES" />
+        </EntityType>
+        <EntityType Name="USERSIMAGE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="USER" Relationship="Self.FK_USERSIMAGES_USERS" FromRole="USERSIMAGES" ToRole="USERS" />
+        </EntityType>
+        <EntityType Name="UZAUTOSUPPLIER">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Country" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ContactPerson" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="TelephoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="MACHINES" Relationship="Self.FK_MACHINES_UZAUTOSUPPLIERS1" FromRole="UZAUTOSUPPLIERS" ToRole="MACHINES" />
+          <NavigationProperty Name="PARTS" Relationship="Self.FK_Parts_Uzautosuppliers" FromRole="UZAUTOSUPPLIERS" ToRole="PARTS" />
+          <NavigationProperty Name="USERS" Relationship="Self.FK__USERS__Uzautosupp" FromRole="UZAUTOSUPPLIERS" ToRole="USERS" />
+        </EntityType>
+        <Association Name="FK_LOGS_USERS">
+          <End Role="USERS" Type="Self.USER" Multiplicity="1" />
+          <End Role="LOGS" Type="Self.LOG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LOGS">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MACHINES__TypeID__73BA3083">
+          <End Role="MACHINETYPES" Type="Self.MACHINETYPE" Multiplicity="1" />
+          <End Role="MACHINES" Type="Self.MACHINE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MACHINETYPES">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MACHINES">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PARTS__MachineID__75A278F5">
+          <End Role="MACHINES" Type="Self.MACHINE" Multiplicity="1" />
+          <End Role="PARTS" Type="Self.PART" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MACHINES">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PARTS">
+              <PropertyRef Name="MachineID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MACHINES_MANUFACTURERS1">
+          <End Role="MANUFACTURERS" Type="Self.MANUFACTURER" Multiplicity="1" />
+          <End Role="MACHINES" Type="Self.MACHINE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MANUFACTURERS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MACHINES">
+              <PropertyRef Name="ManufacturerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MACHINES_UZAUTOSUPPLIERS1">
+          <End Role="UZAUTOSUPPLIERS" Type="Self.UZAUTOSUPPLIER" Multiplicity="1" />
+          <End Role="MACHINES" Type="Self.MACHINE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UZAUTOSUPPLIERS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MACHINES">
+              <PropertyRef Name="UzAutoSupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PARTS__manufactu__6754599E">
+          <End Role="MANUFACTURERS" Type="Self.MANUFACTURER" Multiplicity="1" />
+          <End Role="PARTS" Type="Self.PART" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MANUFACTURERS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PARTS">
+              <PropertyRef Name="ManufacturerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PARTS__oemid__693CA210">
+          <End Role="OEMS" Type="Self.OEM" Multiplicity="1" />
+          <End Role="PARTS" Type="Self.PART" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OEMS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PARTS">
+              <PropertyRef Name="OEMID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PARTS__supplieri__68487DD7">
+          <End Role="SUPPLIERS" Type="Self.SUPPLIER" Multiplicity="1" />
+          <End Role="PARTS" Type="Self.PART" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUPPLIERS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PARTS">
+              <PropertyRef Name="SupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Parts_Uzautosuppliers">
+          <End Role="UZAUTOSUPPLIERS" Type="Self.UZAUTOSUPPLIER" Multiplicity="1" />
+          <End Role="PARTS" Type="Self.PART" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UZAUTOSUPPLIERS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PARTS">
+              <PropertyRef Name="UzAutoSupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__USERS__Uzautosupp">
+          <End Role="UZAUTOSUPPLIERS" Type="Self.UZAUTOSUPPLIER" Multiplicity="1" />
+          <End Role="USERS" Type="Self.USER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UZAUTOSUPPLIERS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="USERS">
+              <PropertyRef Name="UzautosupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USERSIMAGES_USERS">
+          <End Role="USERS" Type="Self.USER" Multiplicity="1" />
+          <End Role="USERSIMAGES" Type="Self.USERSIMAGE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="USERSIMAGES">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PERMISSIONROLES">
+          <End Role="PERMISSIONS" Type="Self.PERMISSION" Multiplicity="*" />
+          <End Role="ROLES" Type="Self.ROLE" Multiplicity="*" />
+        </Association>
+        <Association Name="ROLEUSERS">
+          <End Role="ROLES" Type="Self.ROLE" Multiplicity="*" />
+          <End Role="USERS" Type="Self.USER" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="DBEPREntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="LOGS" EntityType="Self.LOG" />
+          <EntitySet Name="MACHINES" EntityType="Self.MACHINE" />
+          <EntitySet Name="MACHINETYPES" EntityType="Self.MACHINETYPE" />
+          <EntitySet Name="MANUFACTURERS" EntityType="Self.MANUFACTURER" />
+          <EntitySet Name="OEMS" EntityType="Self.OEM" />
+          <EntitySet Name="PARTS" EntityType="Self.PART" />
+          <EntitySet Name="PERMISSIONS" EntityType="Self.PERMISSION" />
+          <EntitySet Name="ROLES" EntityType="Self.ROLE" />
+          <EntitySet Name="SUPPLIERS" EntityType="Self.SUPPLIER" />
+          <EntitySet Name="USERS" EntityType="Self.USER" />
+          <EntitySet Name="USERSIMAGES" EntityType="Self.USERSIMAGE" />
+          <EntitySet Name="UZAUTOSUPPLIERS" EntityType="Self.UZAUTOSUPPLIER" />
+          <AssociationSet Name="FK_LOGS_USERS" Association="Self.FK_LOGS_USERS">
+            <End Role="USERS" EntitySet="USERS" />
+            <End Role="LOGS" EntitySet="LOGS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MACHINES__TypeID__73BA3083" Association="Self.FK__MACHINES__TypeID__73BA3083">
+            <End Role="MACHINETYPES" EntitySet="MACHINETYPES" />
+            <End Role="MACHINES" EntitySet="MACHINES" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PARTS__MachineID__75A278F5" Association="Self.FK__PARTS__MachineID__75A278F5">
+            <End Role="MACHINES" EntitySet="MACHINES" />
+            <End Role="PARTS" EntitySet="PARTS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MACHINES_MANUFACTURERS1" Association="Self.FK_MACHINES_MANUFACTURERS1">
+            <End Role="MANUFACTURERS" EntitySet="MANUFACTURERS" />
+            <End Role="MACHINES" EntitySet="MACHINES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MACHINES_UZAUTOSUPPLIERS1" Association="Self.FK_MACHINES_UZAUTOSUPPLIERS1">
+            <End Role="UZAUTOSUPPLIERS" EntitySet="UZAUTOSUPPLIERS" />
+            <End Role="MACHINES" EntitySet="MACHINES" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PARTS__manufactu__6754599E" Association="Self.FK__PARTS__manufactu__6754599E">
+            <End Role="MANUFACTURERS" EntitySet="MANUFACTURERS" />
+            <End Role="PARTS" EntitySet="PARTS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PARTS__oemid__693CA210" Association="Self.FK__PARTS__oemid__693CA210">
+            <End Role="OEMS" EntitySet="OEMS" />
+            <End Role="PARTS" EntitySet="PARTS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PARTS__supplieri__68487DD7" Association="Self.FK__PARTS__supplieri__68487DD7">
+            <End Role="SUPPLIERS" EntitySet="SUPPLIERS" />
+            <End Role="PARTS" EntitySet="PARTS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Parts_Uzautosuppliers" Association="Self.FK_Parts_Uzautosuppliers">
+            <End Role="UZAUTOSUPPLIERS" EntitySet="UZAUTOSUPPLIERS" />
+            <End Role="PARTS" EntitySet="PARTS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__USERS__Uzautosupp" Association="Self.FK__USERS__Uzautosupp">
+            <End Role="UZAUTOSUPPLIERS" EntitySet="UZAUTOSUPPLIERS" />
+            <End Role="USERS" EntitySet="USERS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USERSIMAGES_USERS" Association="Self.FK_USERSIMAGES_USERS">
+            <End Role="USERS" EntitySet="USERS" />
+            <End Role="USERSIMAGES" EntitySet="USERSIMAGES" />
+          </AssociationSet>
+          <AssociationSet Name="PERMISSIONROLES" Association="Self.PERMISSIONROLES">
+            <End Role="PERMISSIONS" EntitySet="PERMISSIONS" />
+            <End Role="ROLES" EntitySet="ROLES" />
+          </AssociationSet>
+          <AssociationSet Name="ROLEUSERS" Association="Self.ROLEUSERS">
+            <End Role="ROLES" EntitySet="ROLES" />
+            <End Role="USERS" EntitySet="USERS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DBEPRModelStoreContainer" CdmEntityContainer="DBEPREntities">
+          <EntitySetMapping Name="LOGS">
+            <EntityTypeMapping TypeName="DBEPRModel.LOG">
+              <MappingFragment StoreEntitySet="LOGS">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Form" ColumnName="Form" />
+                <ScalarProperty Name="Operation" ColumnName="Operation" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+                <ScalarProperty Name="IP" ColumnName="IP" />
+                <ScalarProperty Name="Line" ColumnName="Line" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MACHINES">
+            <EntityTypeMapping TypeName="DBEPRModel.MACHINE">
+              <MappingFragment StoreEntitySet="MACHINES">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="UzAutoSupplierID" ColumnName="UzAutoSupplierID" />
+                <ScalarProperty Name="ManufacturerID" ColumnName="ManufacturerID" />
+                <ScalarProperty Name="Lifespan" ColumnName="Lifespan" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="InstalledDate" ColumnName="InstalledDate" />
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MACHINETYPES">
+            <EntityTypeMapping TypeName="DBEPRModel.MACHINETYPE">
+              <MappingFragment StoreEntitySet="MACHINETYPES">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MANUFACTURERS">
+            <EntityTypeMapping TypeName="DBEPRModel.MANUFACTURER">
+              <MappingFragment StoreEntitySet="MANUFACTURERS">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+                <ScalarProperty Name="TelephoneNumber" ColumnName="TelephoneNumber" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OEMS">
+            <EntityTypeMapping TypeName="DBEPRModel.OEM">
+              <MappingFragment StoreEntitySet="OEMS">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+                <ScalarProperty Name="TelephoneNumber" ColumnName="TelephoneNumber" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PARTS">
+            <EntityTypeMapping TypeName="DBEPRModel.PART">
+              <MappingFragment StoreEntitySet="PARTS">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PartNumber" ColumnName="PartNumber" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="UzAutoSupplierID" ColumnName="UzAutoSupplierID" />
+                <ScalarProperty Name="NamePlate" ColumnName="NamePlate" />
+                <ScalarProperty Name="ManufacturerID" ColumnName="ManufacturerID" />
+                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+                <ScalarProperty Name="OEMID" ColumnName="OEMID" />
+                <ScalarProperty Name="MachineID" ColumnName="MachineID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PERMISSIONS">
+            <EntityTypeMapping TypeName="DBEPRModel.PERMISSION">
+              <MappingFragment StoreEntitySet="PERMISSIONS">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PermissionName" ColumnName="PermissionName" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ROLES">
+            <EntityTypeMapping TypeName="DBEPRModel.ROLE">
+              <MappingFragment StoreEntitySet="ROLES">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SUPPLIERS">
+            <EntityTypeMapping TypeName="DBEPRModel.SUPPLIER">
+              <MappingFragment StoreEntitySet="SUPPLIERS">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+                <ScalarProperty Name="TelephoneNumber" ColumnName="TelephoneNumber" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USERS">
+            <EntityTypeMapping TypeName="DBEPRModel.USER">
+              <MappingFragment StoreEntitySet="USERS">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="Answer" ColumnName="Answer" />
+                <ScalarProperty Name="IsOnline" ColumnName="IsOnline" />
+                <ScalarProperty Name="UzautosupplierID" ColumnName="UzautosupplierID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USERSIMAGES">
+            <EntityTypeMapping TypeName="DBEPRModel.USERSIMAGE">
+              <MappingFragment StoreEntitySet="USERSIMAGES">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UZAUTOSUPPLIERS">
+            <EntityTypeMapping TypeName="DBEPRModel.UZAUTOSUPPLIER">
+              <MappingFragment StoreEntitySet="UZAUTOSUPPLIERS">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+                <ScalarProperty Name="TelephoneNumber" ColumnName="TelephoneNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="PERMISSIONROLES" TypeName="DBEPRModel.PERMISSIONROLES" StoreEntitySet="PERMISSIONROLES">
+            <EndProperty Name="PERMISSIONS">
+              <ScalarProperty Name="ID" ColumnName="PermissionID" />
+            </EndProperty>
+            <EndProperty Name="ROLES">
+              <ScalarProperty Name="ID" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="ROLEUSERS" TypeName="DBEPRModel.ROLEUSERS" StoreEntitySet="ROLEUSERS">
+            <EndProperty Name="ROLES">
+              <ScalarProperty Name="ID" ColumnName="RoleID" />
+            </EndProperty>
+            <EndProperty Name="USERS">
+              <ScalarProperty Name="ID" ColumnName="UserID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
