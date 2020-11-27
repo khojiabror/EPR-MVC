@@ -29,6 +29,7 @@ namespace EPR_MVC.Models
         public Nullable<System.DateTime> InstalledDate { get; set; }
         public int TypeID { get; set; }
         public int ID { get; set; }
+        public string PartNumber { get; set; }
     
         public virtual MACHINETYPE MACHINETYPE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

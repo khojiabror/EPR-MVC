@@ -16,7 +16,7 @@ namespace EPR_MVC.Controllers
 
                 PartsViewModel pvm = new PartsViewModel();
 
-                List<PartsViewModel> partVMList = partList.Select(p => new PartsViewModel { Code = p.Code, Name = p.Name, Description = p.Description, PartNumber = p.PartNumber, NamePlate = p.NamePlate, MachineName = p.MACHINE.Name, SupplierName = p.SUPPLIER.Name, OEMName = p.OEM.Name, ManufacturerName = p.MANUFACTURER.Name, UzAutoSupplierName = p.UZAUTOSUPPLIER.Name }).ToList();
+                List<PartsViewModel> partVMList = partList.Select(p => new PartsViewModel { Code = p.Code, Name = p.Name, Description = p.Description, PartNumber = p.PartNumber, NamePlate = p.NamePlate, MachineName = p.MACHINE.Name, SupplierName = p.SUPPLIER.Name, OEMName = p.OEM.Name, ManufacturerName = p.MANUFACTURER.Name, UzAutoSupplierName = p.UZAUTOSUPPLIER.Name}).ToList();
                 return View(partVMList);
             }
         }

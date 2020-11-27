@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DBEPRModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DBEPRModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="LOGS">
           <Key>
             <PropertyRef Name="ID" />
@@ -30,6 +30,7 @@
           <Property Name="InstalledDate" Type="date" />
           <Property Name="TypeID" Type="int" Nullable="false" />
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PartNumber" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="MACHINETYPES">
           <Key>
@@ -434,8 +435,7 @@ warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key d
             <End Role="USERSIMAGES" EntitySet="USERSIMAGES" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DBEPRModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -469,6 +469,7 @@ warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key d
           <NavigationProperty Name="PARTS" Relationship="Self.FK__PARTS__MachineID__75A278F5" FromRole="MACHINES" ToRole="PARTS" />
           <NavigationProperty Name="MANUFACTURER" Relationship="Self.FK_MACHINES_MANUFACTURERS1" FromRole="MACHINES" ToRole="MANUFACTURERS" />
           <NavigationProperty Name="UZAUTOSUPPLIER" Relationship="Self.FK_MACHINES_UZAUTOSUPPLIERS1" FromRole="MACHINES" ToRole="UZAUTOSUPPLIERS" />
+          <Property Name="PartNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="MACHINETYPE">
           <Key>
@@ -836,6 +837,7 @@ warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key d
           <EntitySetMapping Name="MACHINES">
             <EntityTypeMapping TypeName="DBEPRModel.MACHINE">
               <MappingFragment StoreEntitySet="MACHINES">
+                <ScalarProperty Name="PartNumber" ColumnName="PartNumber" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="UzAutoSupplierID" ColumnName="UzAutoSupplierID" />
