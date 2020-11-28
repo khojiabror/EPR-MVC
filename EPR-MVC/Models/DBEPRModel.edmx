@@ -84,6 +84,7 @@
           <Property Name="SupplierID" Type="int" Nullable="false" />
           <Property Name="OEMID" Type="int" Nullable="false" />
           <Property Name="MachineID" Type="int" Nullable="false" />
+          <Property Name="OEMPartNumber" Type="varchar" MaxLength="30" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'DBEPR.dbo.PERMISSIONROLES' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -532,6 +533,7 @@ warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key d
           <NavigationProperty Name="OEM" Relationship="Self.FK__PARTS__oemid__693CA210" FromRole="PARTS" ToRole="OEMS" />
           <NavigationProperty Name="SUPPLIER" Relationship="Self.FK__PARTS__supplieri__68487DD7" FromRole="PARTS" ToRole="SUPPLIERS" />
           <NavigationProperty Name="UZAUTOSUPPLIER" Relationship="Self.FK_Parts_Uzautosuppliers" FromRole="PARTS" ToRole="UZAUTOSUPPLIERS" />
+          <Property Name="OEMPartNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="PERMISSION">
           <Key>
@@ -892,6 +894,7 @@ warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key d
           <EntitySetMapping Name="PARTS">
             <EntityTypeMapping TypeName="DBEPRModel.PART">
               <MappingFragment StoreEntitySet="PARTS">
+                <ScalarProperty Name="OEMPartNumber" ColumnName="OEMPartNumber" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Name" ColumnName="Name" />

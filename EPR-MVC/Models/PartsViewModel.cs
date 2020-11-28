@@ -12,6 +12,7 @@ namespace EPR_MVC.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public string PartNumber { get; set; }
+        public string OEMPartNumber { get; set; }
         public byte[] Photo { get; set; }
         public string UzAutoSupplierName { get; set; }
         public string NamePlate { get; set; }

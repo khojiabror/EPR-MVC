@@ -26,6 +26,7 @@ namespace EPR_MVC.Models
         public int SupplierID { get; set; }
         public int OEMID { get; set; }
         public int MachineID { get; set; }
+        public string OEMPartNumber { get; set; }
     
         public virtual MACHINE MACHINE { get; set; }
         public virtual MANUFACTURER MANUFACTURER { get; set; }
