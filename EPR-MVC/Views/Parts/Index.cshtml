@@ -1,45 +1,144 @@
 ﻿@model IEnumerable<EPR_MVC.Models.PartsViewModel>
-@{
-    ViewBag.Title = "Запчасти";
-}
+<head>
+    <!-- BEGIN: Vendor CSS-->
+    <link rel="stylesheet" type="text/css" href="~/Scripts/Frest-template/app-assets/vendors/css/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Scripts/Frest-template/app-assets/vendors/css/tables/datatable/datatables.min.css">
+    <!-- END: Vendor CSS-->
+</head>
+<body class="vertical-layout vertical-menu-modern 2-columns  navbar-sticky footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
 
-<h2>Запчасти</h2>
-
-<div class="container" style="margin-top:2%;">
     @if (Model != null)
     {
-        <table class="table table-striped">
-            <tr>
-                <th>Code</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Partnumber</th>
-                <th>OEM Partnumber</th>
-                <th>Nameplate</th>
-                <th>Оборудование</th>
-                <th>Поставщик</th>
-                <th>OEM</th>
-                <th>Производитель</th>
-                <th>Компания UzAuto</th>
-            </tr>
-            <tbody>
-                @foreach (var part in Model)
-                {
-                    <tr>
-                        <td>@part.Code </td>
-                        <td>@part.Name </td>
-                        <td>@part.Description </td>
-                        <td>@part.PartNumber </td>
-                        <td>@part.OEMPartNumber </td>
-                        <td>@part.NamePlate </td>
-                        <td>@part.MachineName </td>
-                        <td>@part.SupplierName </td>
-                        <td>@part.OEMName </td>
-                        <td>@part.ManufacturerName </td>
-                        <td>@part.UzAutoSupplierName </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+        <!-- BEGIN: Content-->
+        <div class="app-content content">
+            <div class="content-overlay"></div>
+            <div class="content-wrapper">
+                <div class="content-header row">
+                    <div class="content-header-left col-12 mb-2 mt-1">
+                        <div class="row breadcrumbs-top">
+                            <div class="col-12">
+                                <h5 class="content-header-title float-left pr-1 mb-0">DataTables</h5>
+                                <div class="breadcrumb-wrapper col-12">
+                                    <ol class="breadcrumb p-0 mb-0">
+                                        <li class="breadcrumb-item">
+                                            <a href="index"><i class="bx bx-home-alt"></i></a>
+                                        </li>
+                                        <li class="breadcrumb-item active">
+                                            Datatable
+                                        </li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <p>Read full documnetation <a href="https://datatables.net/" target="_blank">here</a></p>
+                        </div>
+                    </div>
+                    <!-- Column selectors with Export Options and print table -->
+                    <section id="column-selectors">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">Column selectors with Export and Print Options</h4>
+                                    </div>
+                                    <div class="card-content">
+                                        <div class="card-body card-dashboard">
+                                            <p class="card-text">
+                                                All of the data export buttons have a exportOptions option which can be
+                                                used to specify information about what data should be exported and how. The options given
+                                                for this parameter are passed directly to the buttons.exportData() method to obtain the
+                                                required data.
+                                            </p>
+                                            <p>
+                                                The print button will open a new window in the end user's browser and, by default,
+                                                automatically trigger the print function allowing the end user to print the table. The
+                                                window will be closed once the print is complete, or has been cancelled.
+                                            </p>
+                                            <div class="table-responsive">
+                                                <table class="table table-striped dataex-html5-selectors">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Code</th>
+                                                            <th>Name</th>
+                                                            <th>Description</th>
+                                                            <th>Partnumber</th>
+                                                            <th>OEM Partnumber</th>
+                                                            <th>Nameplate</th>
+                                                            <th>Оборудование</th>
+                                                            <th>Поставщик</th>
+                                                            <th>OEM</th>
+                                                            <th>Производитель</th>
+                                                            <th>Компания UzAuto</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach (var part in Model)
+                                                        {
+                                                            <tr>
+                                                                <td>@part.Code </td>
+                                                                <td>@part.Name </td>
+                                                                <td>@part.Description </td>
+                                                                <td class="text-bold-500">@part.PartNumber </td>
+                                                                <td>@part.OEMPartNumber </td>
+                                                                <td>@part.NamePlate </td>
+                                                                <td>@part.MachineName </td>
+                                                                <td>@part.SupplierName </td>
+                                                                <td>@part.OEMName </td>
+                                                                <td>@part.ManufacturerName </td>
+                                                                <td>@part.UzAutoSupplierName </td>
+                                                            </tr>
+                                                        }
+                                                    </tbody>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <th>Code</th>
+                                                            <th>Name</th>
+                                                            <th>Description</th>
+                                                            <th>Partnumber</th>
+                                                            <th>OEM Partnumber</th>
+                                                            <th>Nameplate</th>
+                                                            <th>Оборудование</th>
+                                                            <th>Поставщик</th>
+                                                            <th>OEM</th>
+                                                            <th>Производитель</th>
+                                                            <th>Компания UzAuto</th>
+                                                        </tr>
+                                                    </tfoot>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
     }
-</div>
+    <!-- BEGIN: Vendor JS-->
+    <script src="~/Scripts/Frest-template/app-assets/vendors/js/vendors.min.js"></script>
+    <script src="~/Scripts/Frest-template/app-assets/fonts/LivIconsEvo/js/LivIconsEvo.tools.js"></script>
+    <script src="~/Scripts/Frest-template/app-assets/fonts/LivIconsEvo/js/LivIconsEvo.defaults.js"></script>
+    <script src="~/Scripts/Frest-template/app-assets/fonts/LivIconsEvo/js/LivIconsEvo.min.js"></script>
+    <!-- BEGIN Vendor JS-->
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="~/Scripts/Frest-template/app-assets/vendors/js/tables/datatable/datatables.min.js"></script>
+    <script src="~/Scripts/Frest-template/app-assets/vendors/js/tables/datatable/dataTables.bootstrap4.min.js"></script>
+    <script src="~/Scripts/Frest-template/app-assets/vendors/js/tables/datatable/dataTables.buttons.min.js"></script>
+    <script src="~/Scripts/Frest-template/app-assets/vendors/js/tables/datatable/buttons.html5.min.js"></script>
+    <script src="~/Scripts/Frest-template/app-assets/vendors/js/tables/datatable/buttons.print.min.js"></script>
+    <script src="~/Scripts/Frest-template/app-assets/vendors/js/tables/datatable/buttons.bootstrap.min.js"></script>
+    <script src="~/Scripts/Frest-template/app-assets/vendors/js/tables/datatable/pdfmake.min.js"></script>
+    <script src="~/Scripts/Frest-template/app-assets/vendors/js/tables/datatable/vfs_fonts.js"></script>
+    <!-- END: Page Vendor JS-->
+    <!-- BEGIN: Page JS-->
+    <script src="~/Scripts/Frest-template/app-assets/js/scripts/datatables/datatable.js"></script>
+    <!-- END: Page JS-->
+
+</body>
