@@ -21,6 +21,7 @@ namespace EPR_MVC.Models
         public Nullable<System.DateTime> DateTime { get; set; }
         public string IP { get; set; }
         public string Line { get; set; }
+        public Nullable<bool> IsDeleted { get; set; }
     
         public virtual USER USER { get; set; }
     }

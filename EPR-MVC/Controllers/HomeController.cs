@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EPR_MVC.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,17 +14,16 @@ namespace EPR_MVC.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult Auth()
         {
-            ViewBag.Message = "Your application description page.";
+            //using (DBEPREntities db = new DBEPREntities())
+            //{
+            //    USER user = db.USERS.SingleOrDefault(u => u.Name);
 
-            return View();
-        }
+            //    PartsViewModel pvm = new PartsViewModel();
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
+            //    return View();
+            //}   
             return View();
         }
     }

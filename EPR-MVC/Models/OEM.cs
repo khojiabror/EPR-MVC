@@ -29,6 +29,7 @@ namespace EPR_MVC.Models
         public string ContactPerson { get; set; }
         public string TelephoneNumber { get; set; }
         public string Website { get; set; }
+        public Nullable<bool> IsDeleted { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PART> PARTS { get; set; }

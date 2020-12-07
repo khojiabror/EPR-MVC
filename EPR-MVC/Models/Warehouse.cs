@@ -12,33 +12,26 @@ namespace EPR_MVC.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class UZAUTOSUPPLIER
+    public partial class Warehouse
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public UZAUTOSUPPLIER()
+        public Warehouse()
         {
-            this.MACHINES = new HashSet<MACHINE>();
-            this.ORDERS = new HashSet<ORDER>();
-            this.PARTS = new HashSet<PART>();
-            this.USERS = new HashSet<USER>();
+            this.WH_INS = new HashSet<WH_INS>();
+            this.WH_OUTS = new HashSet<WH_OUTS>();
         }
     
         public int ID { get; set; }
         public string Name { get; set; }
-        public string Country { get; set; }
-        public string Address { get; set; }
-        public string Email { get; set; }
-        public string ContactPerson { get; set; }
-        public string TelephoneNumber { get; set; }
+        public string Description { get; set; }
+        public string WorkingPeriod { get; set; }
+        public int StockmanID { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
     
+        public virtual USER USER { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MACHINE> MACHINES { get; set; }
+        public virtual ICollection<WH_INS> WH_INS { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ORDER> ORDERS { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PART> PARTS { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<USER> USERS { get; set; }
+        public virtual ICollection<WH_OUTS> WH_OUTS { get; set; }
     }
 }

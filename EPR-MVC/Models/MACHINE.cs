@@ -18,6 +18,8 @@ namespace EPR_MVC.Models
         public MACHINE()
         {
             this.PARTS = new HashSet<PART>();
+            this.WH_INS = new HashSet<WH_INS>();
+            this.WH_OUTS = new HashSet<WH_OUTS>();
         }
     
         public string Name { get; set; }
@@ -30,11 +32,16 @@ namespace EPR_MVC.Models
         public int TypeID { get; set; }
         public int ID { get; set; }
         public string PartNumber { get; set; }
+        public Nullable<bool> IsDeleted { get; set; }
     
         public virtual MACHINETYPE MACHINETYPE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PART> PARTS { get; set; }
         public virtual MANUFACTURER MANUFACTURER { get; set; }
         public virtual UZAUTOSUPPLIER UZAUTOSUPPLIER { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<WH_INS> WH_INS { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<WH_OUTS> WH_OUTS { get; set; }
     }
 }

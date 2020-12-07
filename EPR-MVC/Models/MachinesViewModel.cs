@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace EPR_MVC.Models
 {
@@ -6,13 +7,16 @@ namespace EPR_MVC.Models
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public string UzAutoSupplier { get; set; }
-        public string Manufacturer { get; set; }
+        public int UzAutoSupplierID { get; set; }
+        public int ManufacturerID { get; set; }
         public string Lifespan { get; set; }
-        public Nullable<bool> IsActive { get; set; }
-        public Nullable<System.DateTime> InstalledDate { get; set; }
-        public string Type { get; set; }
+        public bool IsActive { get; set; }
+        public DateTime? InstalledDate { get; set; }
+        public int TypeID { get; set; }
         public string PartNumber { get; set; }
         public int ID { get; set; }
+        public bool Status { get; set; }
+
+        public List<MACHINE> machineList { get; set; }
     }
 }

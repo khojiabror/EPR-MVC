@@ -16,6 +16,7 @@
           <Property Name="DateTime" Type="datetime" />
           <Property Name="IP" Type="varchar" MaxLength="15" />
           <Property Name="Line" Type="varchar" MaxLength="15" />
+          <Property Name="IsDeleted" Type="bit" />
         </EntityType>
         <EntityType Name="MACHINES">
           <Key>
@@ -31,6 +32,7 @@
           <Property Name="TypeID" Type="int" Nullable="false" />
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PartNumber" Type="varchar" MaxLength="20" />
+          <Property Name="IsDeleted" Type="bit" />
         </EntityType>
         <EntityType Name="MACHINETYPES">
           <Key>
@@ -39,6 +41,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="25" />
           <Property Name="Description" Type="text" />
+          <Property Name="IsDeleted" Type="bit" />
         </EntityType>
         <EntityType Name="MANUFACTURERS">
           <Key>
@@ -53,6 +56,7 @@
           <Property Name="ContactPerson" Type="varchar" MaxLength="15" />
           <Property Name="TelephoneNumber" Type="varchar" MaxLength="20" />
           <Property Name="Website" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" />
         </EntityType>
         <EntityType Name="OEMS">
           <Key>
@@ -67,6 +71,27 @@
           <Property Name="ContactPerson" Type="varchar" MaxLength="15" />
           <Property Name="TelephoneNumber" Type="varchar" MaxLength="20" />
           <Property Name="Website" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="ORDERS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderNumber" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="PartID" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="Qty" Type="float" Nullable="false" />
+          <Property Name="TechnicalTask" Type="varbinary(max)" />
+          <Property Name="Name" Type="varchar" MaxLength="30" />
+          <Property Name="Description" Type="text" />
+          <Property Name="Specification" Type="text" />
+          <Property Name="CurrentPartPrice" Type="float" Nullable="false" />
+          <Property Name="Currency" Type="varchar" MaxLength="15" />
+          <Property Name="Status" Type="varchar" MaxLength="20" />
+          <Property Name="UzAutoSupplierID" Type="int" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" />
         </EntityType>
         <EntityType Name="PARTS">
           <Key>
@@ -79,12 +104,23 @@
           <Property Name="PartNumber" Type="varchar" MaxLength="15" />
           <Property Name="Photo" Type="image" />
           <Property Name="UzAutoSupplierID" Type="int" Nullable="false" />
-          <Property Name="NamePlate" Type="varchar" MaxLength="50" />
+          <Property Name="NamePlate" Type="image" />
           <Property Name="ManufacturerID" Type="int" Nullable="false" />
           <Property Name="SupplierID" Type="int" Nullable="false" />
           <Property Name="OEMID" Type="int" Nullable="false" />
           <Property Name="MachineID" Type="int" Nullable="false" />
           <Property Name="OEMPartNumber" Type="varchar" MaxLength="30" />
+          <Property Name="Model" Type="varchar" MaxLength="20" />
+          <Property Name="Type" Type="varchar" MaxLength="20" />
+          <Property Name="SerialNumber" Type="varchar" MaxLength="50" />
+          <Property Name="Manufactured Date" Type="date" />
+          <Property Name="NameRus" Type="varchar" MaxLength="50" />
+          <Property Name="DescriptionRus" Type="text" />
+          <Property Name="TechData" Type="text" />
+          <Property Name="Unit" Type="varchar" MaxLength="10" />
+          <Property Name="Price" Type="float" />
+          <Property Name="Currency" Type="varchar" MaxLength="15" />
+          <Property Name="IsDeleted" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'DBEPR.dbo.PERMISSIONROLES' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -103,6 +139,7 @@ warning 6002: The table/view 'DBEPR.dbo.PERMISSIONROLES' does not have a primary
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PermissionName" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Model" Type="varchar" MaxLength="50" />
+          <Property Name="IsDeleted" Type="bit" />
         </EntityType>
         <EntityType Name="ROLES">
           <Key>
@@ -112,6 +149,7 @@ warning 6002: The table/view 'DBEPR.dbo.PERMISSIONROLES' does not have a primary
           <Property Name="RoleName" Type="varchar" MaxLength="50" />
           <Property Name="Description" Type="text" />
           <Property Name="IsAdmin" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -135,6 +173,7 @@ warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key d
           <Property Name="ContactPerson" Type="varchar" MaxLength="15" />
           <Property Name="TelephoneNumber" Type="varchar" MaxLength="20" />
           <Property Name="Website" Type="varchar" MaxLength="25" />
+          <Property Name="IsDeleted" Type="bit" />
         </EntityType>
         <EntityType Name="USERS">
           <Key>
@@ -149,6 +188,10 @@ warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key d
           <Property Name="Answer" Type="varchar" MaxLength="20" />
           <Property Name="IsOnline" Type="bit" />
           <Property Name="UzautosupplierID" Type="int" Nullable="false" />
+          <Property Name="Telephone" Type="varchar" MaxLength="20" />
+          <Property Name="Department" Type="varchar" MaxLength="20" />
+          <Property Name="JobTitle" Type="varchar" MaxLength="30" />
+          <Property Name="IsDeleted" Type="bit" />
         </EntityType>
         <EntityType Name="USERSIMAGES">
           <Key>
@@ -169,6 +212,44 @@ warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key d
           <Property Name="Email" Type="varchar" MaxLength="30" />
           <Property Name="ContactPerson" Type="varchar" MaxLength="15" />
           <Property Name="TelephoneNumber" Type="varchar" MaxLength="20" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="WAREHOUSES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="30" />
+          <Property Name="Description" Type="text" />
+          <Property Name="WorkingPeriod" Type="varchar" MaxLength="15" />
+          <Property Name="StockmanID" Type="int" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="WH_INS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PartID" Type="int" Nullable="false" />
+          <Property Name="DateTime" Type="datetime" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="WHID" Type="int" Nullable="false" />
+          <Property Name="MachineID" Type="int" Nullable="false" />
+          <Property Name="Comment" Type="text" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="WH_OUTS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PartID" Type="int" Nullable="false" />
+          <Property Name="DateTime" Type="datetime" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="WHID" Type="int" Nullable="false" />
+          <Property Name="MachineID" Type="int" Nullable="false" />
+          <Property Name="Comment" Type="text" />
+          <Property Name="IsDeleted" Type="bit" />
         </EntityType>
         <Association Name="FK__MACHINES__TypeID__73BA3083">
           <End Role="MACHINETYPES" Type="Self.MACHINETYPES" Multiplicity="1" />
@@ -179,6 +260,18 @@ warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key d
             </Principal>
             <Dependent Role="MACHINES">
               <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ORDERS__UzAutoSu__08B54D69">
+          <End Role="UZAUTOSUPPLIERS" Type="Self.UZAUTOSUPPLIERS" Multiplicity="1" />
+          <End Role="ORDERS" Type="Self.ORDERS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UZAUTOSUPPLIERS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ORDERS">
+              <PropertyRef Name="UzAutoSupplierID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -278,6 +371,30 @@ warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key d
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ORDERS_PARTS">
+          <End Role="PARTS" Type="Self.PARTS" Multiplicity="1" />
+          <End Role="ORDERS" Type="Self.ORDERS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PARTS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ORDERS">
+              <PropertyRef Name="PartID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ORDERS_USERS">
+          <End Role="USERS" Type="Self.USERS" Multiplicity="1" />
+          <End Role="ORDERS" Type="Self.ORDERS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ORDERS">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Parts_Uzautosuppliers">
           <End Role="UZAUTOSUPPLIERS" Type="Self.UZAUTOSUPPLIERS" Multiplicity="1" />
           <End Role="PARTS" Type="Self.PARTS" Multiplicity="*" />
@@ -350,12 +467,121 @@ warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key d
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_WAREHOUSES_USERS">
+          <End Role="USERS" Type="Self.USERS" Multiplicity="1" />
+          <End Role="WAREHOUSES" Type="Self.WAREHOUSES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WAREHOUSES">
+              <PropertyRef Name="StockmanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WH_INS_MACHINES">
+          <End Role="MACHINES" Type="Self.MACHINES" Multiplicity="1" />
+          <End Role="WH_INS" Type="Self.WH_INS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MACHINES">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WH_INS">
+              <PropertyRef Name="MachineID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WH_INS_PARTS">
+          <End Role="PARTS" Type="Self.PARTS" Multiplicity="1" />
+          <End Role="WH_INS" Type="Self.WH_INS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PARTS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WH_INS">
+              <PropertyRef Name="PartID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WH_INS_USERS">
+          <End Role="USERS" Type="Self.USERS" Multiplicity="1" />
+          <End Role="WH_INS" Type="Self.WH_INS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WH_INS">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WH_INS_WAREHOUSES">
+          <End Role="WAREHOUSES" Type="Self.WAREHOUSES" Multiplicity="1" />
+          <End Role="WH_INS" Type="Self.WH_INS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WAREHOUSES">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WH_INS">
+              <PropertyRef Name="WHID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WH_OUTS_MACHINES">
+          <End Role="MACHINES" Type="Self.MACHINES" Multiplicity="1" />
+          <End Role="WH_OUTS" Type="Self.WH_OUTS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MACHINES">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WH_OUTS">
+              <PropertyRef Name="MachineID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WH_OUTS_PARTS">
+          <End Role="PARTS" Type="Self.PARTS" Multiplicity="1" />
+          <End Role="WH_OUTS" Type="Self.WH_OUTS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PARTS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WH_OUTS">
+              <PropertyRef Name="PartID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WH_OUTS_USERS">
+          <End Role="USERS" Type="Self.USERS" Multiplicity="1" />
+          <End Role="WH_OUTS" Type="Self.WH_OUTS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WH_OUTS">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WH_OUTS_WAREHOUSES">
+          <End Role="WAREHOUSES" Type="Self.WAREHOUSES" Multiplicity="1" />
+          <End Role="WH_OUTS" Type="Self.WH_OUTS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WAREHOUSES">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WH_OUTS">
+              <PropertyRef Name="WHID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="DBEPRModelStoreContainer">
           <EntitySet Name="LOGS" EntityType="Self.LOGS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MACHINES" EntityType="Self.MACHINES" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MACHINETYPES" EntityType="Self.MACHINETYPES" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MANUFACTURERS" EntityType="Self.MANUFACTURERS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OEMS" EntityType="Self.OEMS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ORDERS" EntityType="Self.ORDERS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PARTS" EntityType="Self.PARTS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PERMISSIONS" EntityType="Self.PERMISSIONS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ROLES" EntityType="Self.ROLES" Schema="dbo" store:Type="Tables" />
@@ -363,6 +589,9 @@ warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key d
           <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USERSIMAGES" EntityType="Self.USERSIMAGES" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UZAUTOSUPPLIERS" EntityType="Self.UZAUTOSUPPLIERS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WAREHOUSES" EntityType="Self.WAREHOUSES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WH_INS" EntityType="Self.WH_INS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WH_OUTS" EntityType="Self.WH_OUTS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PERMISSIONROLES" EntityType="Self.PERMISSIONROLES" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [PERMISSIONROLES].[PermissionID] AS [PermissionID], 
@@ -378,6 +607,10 @@ warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key d
           <AssociationSet Name="FK__MACHINES__TypeID__73BA3083" Association="Self.FK__MACHINES__TypeID__73BA3083">
             <End Role="MACHINETYPES" EntitySet="MACHINETYPES" />
             <End Role="MACHINES" EntitySet="MACHINES" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ORDERS__UzAutoSu__08B54D69" Association="Self.FK__ORDERS__UzAutoSu__08B54D69">
+            <End Role="UZAUTOSUPPLIERS" EntitySet="UZAUTOSUPPLIERS" />
+            <End Role="ORDERS" EntitySet="ORDERS" />
           </AssociationSet>
           <AssociationSet Name="FK__PARTS__MachineID__75A278F5" Association="Self.FK__PARTS__MachineID__75A278F5">
             <End Role="MACHINES" EntitySet="MACHINES" />
@@ -411,6 +644,14 @@ warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key d
             <End Role="UZAUTOSUPPLIERS" EntitySet="UZAUTOSUPPLIERS" />
             <End Role="MACHINES" EntitySet="MACHINES" />
           </AssociationSet>
+          <AssociationSet Name="FK_ORDERS_PARTS" Association="Self.FK_ORDERS_PARTS">
+            <End Role="PARTS" EntitySet="PARTS" />
+            <End Role="ORDERS" EntitySet="ORDERS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ORDERS_USERS" Association="Self.FK_ORDERS_USERS">
+            <End Role="USERS" EntitySet="USERS" />
+            <End Role="ORDERS" EntitySet="ORDERS" />
+          </AssociationSet>
           <AssociationSet Name="FK_Parts_Uzautosuppliers" Association="Self.FK_Parts_Uzautosuppliers">
             <End Role="UZAUTOSUPPLIERS" EntitySet="UZAUTOSUPPLIERS" />
             <End Role="PARTS" EntitySet="PARTS" />
@@ -435,6 +676,42 @@ warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key d
             <End Role="USERS" EntitySet="USERS" />
             <End Role="USERSIMAGES" EntitySet="USERSIMAGES" />
           </AssociationSet>
+          <AssociationSet Name="FK_WAREHOUSES_USERS" Association="Self.FK_WAREHOUSES_USERS">
+            <End Role="USERS" EntitySet="USERS" />
+            <End Role="WAREHOUSES" EntitySet="WAREHOUSES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WH_INS_MACHINES" Association="Self.FK_WH_INS_MACHINES">
+            <End Role="MACHINES" EntitySet="MACHINES" />
+            <End Role="WH_INS" EntitySet="WH_INS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WH_INS_PARTS" Association="Self.FK_WH_INS_PARTS">
+            <End Role="PARTS" EntitySet="PARTS" />
+            <End Role="WH_INS" EntitySet="WH_INS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WH_INS_USERS" Association="Self.FK_WH_INS_USERS">
+            <End Role="USERS" EntitySet="USERS" />
+            <End Role="WH_INS" EntitySet="WH_INS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WH_INS_WAREHOUSES" Association="Self.FK_WH_INS_WAREHOUSES">
+            <End Role="WAREHOUSES" EntitySet="WAREHOUSES" />
+            <End Role="WH_INS" EntitySet="WH_INS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WH_OUTS_MACHINES" Association="Self.FK_WH_OUTS_MACHINES">
+            <End Role="MACHINES" EntitySet="MACHINES" />
+            <End Role="WH_OUTS" EntitySet="WH_OUTS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WH_OUTS_PARTS" Association="Self.FK_WH_OUTS_PARTS">
+            <End Role="PARTS" EntitySet="PARTS" />
+            <End Role="WH_OUTS" EntitySet="WH_OUTS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WH_OUTS_USERS" Association="Self.FK_WH_OUTS_USERS">
+            <End Role="USERS" EntitySet="USERS" />
+            <End Role="WH_OUTS" EntitySet="WH_OUTS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WH_OUTS_WAREHOUSES" Association="Self.FK_WH_OUTS_WAREHOUSES">
+            <End Role="WAREHOUSES" EntitySet="WAREHOUSES" />
+            <End Role="WH_OUTS" EntitySet="WH_OUTS" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -452,6 +729,7 @@ warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key d
           <Property Name="IP" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="Line" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="USER" Relationship="Self.FK_LOGS_USERS" FromRole="LOGS" ToRole="USERS" />
+          <Property Name="IsDeleted" Type="Boolean" />
         </EntityType>
         <EntityType Name="MACHINE">
           <Key>
@@ -466,11 +744,14 @@ warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key d
           <Property Name="InstalledDate" Type="DateTime" Precision="0" />
           <Property Name="TypeID" Type="Int32" Nullable="false" />
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PartNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="MACHINETYPE" Relationship="Self.FK__MACHINES__TypeID__73BA3083" FromRole="MACHINES" ToRole="MACHINETYPES" />
           <NavigationProperty Name="PARTS" Relationship="Self.FK__PARTS__MachineID__75A278F5" FromRole="MACHINES" ToRole="PARTS" />
           <NavigationProperty Name="MANUFACTURER" Relationship="Self.FK_MACHINES_MANUFACTURERS1" FromRole="MACHINES" ToRole="MANUFACTURERS" />
           <NavigationProperty Name="UZAUTOSUPPLIER" Relationship="Self.FK_MACHINES_UZAUTOSUPPLIERS1" FromRole="MACHINES" ToRole="UZAUTOSUPPLIERS" />
-          <Property Name="PartNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="WH_INS" Relationship="Self.FK_WH_INS_MACHINES" FromRole="MACHINES" ToRole="WH_INS" />
+          <NavigationProperty Name="WH_OUTS" Relationship="Self.FK_WH_OUTS_MACHINES" FromRole="MACHINES" ToRole="WH_OUTS" />
+          <Property Name="IsDeleted" Type="Boolean" />
         </EntityType>
         <EntityType Name="MACHINETYPE">
           <Key>
@@ -480,6 +761,7 @@ warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key d
           <Property Name="Name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="MACHINES" Relationship="Self.FK__MACHINES__TypeID__73BA3083" FromRole="MACHINETYPES" ToRole="MACHINES" />
+          <Property Name="IsDeleted" Type="Boolean" />
         </EntityType>
         <EntityType Name="MANUFACTURER">
           <Key>
@@ -496,6 +778,7 @@ warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key d
           <Property Name="Website" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="MACHINES" Relationship="Self.FK_MACHINES_MANUFACTURERS1" FromRole="MANUFACTURERS" ToRole="MACHINES" />
           <NavigationProperty Name="PARTS" Relationship="Self.FK__PARTS__manufactu__6754599E" FromRole="MANUFACTURERS" ToRole="PARTS" />
+          <Property Name="IsDeleted" Type="Boolean" />
         </EntityType>
         <EntityType Name="OEM">
           <Key>
@@ -511,6 +794,30 @@ warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key d
           <Property Name="TelephoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Website" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="PARTS" Relationship="Self.FK__PARTS__oemid__693CA210" FromRole="OEMS" ToRole="PARTS" />
+          <Property Name="IsDeleted" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="ORDER">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="PartID" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Qty" Type="Double" Nullable="false" />
+          <Property Name="TechnicalTask" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Specification" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CurrentPartPrice" Type="Double" Nullable="false" />
+          <Property Name="Currency" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="UzAutoSupplierID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="UZAUTOSUPPLIER" Relationship="Self.FK__ORDERS__UzAutoSu__08B54D69" FromRole="ORDERS" ToRole="UZAUTOSUPPLIERS" />
+          <NavigationProperty Name="PART" Relationship="Self.FK_ORDERS_PARTS" FromRole="ORDERS" ToRole="PARTS" />
+          <NavigationProperty Name="USER" Relationship="Self.FK_ORDERS_USERS" FromRole="ORDERS" ToRole="USERS" />
+          <Property Name="IsDeleted" Type="Boolean" />
         </EntityType>
         <EntityType Name="PART">
           <Key>
@@ -523,17 +830,31 @@ warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key d
           <Property Name="PartNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="UzAutoSupplierID" Type="Int32" Nullable="false" />
-          <Property Name="NamePlate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NamePlate" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="ManufacturerID" Type="Int32" Nullable="false" />
           <Property Name="SupplierID" Type="Int32" Nullable="false" />
           <Property Name="OEMID" Type="Int32" Nullable="false" />
           <Property Name="MachineID" Type="Int32" Nullable="false" />
+          <Property Name="OEMPartNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Model" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Type" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="SerialNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Manufactured_Date" Type="DateTime" Precision="0" />
+          <Property Name="NameRus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DescriptionRus" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TechData" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Unit" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Price" Type="Double" />
+          <Property Name="Currency" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="MACHINE" Relationship="Self.FK__PARTS__MachineID__75A278F5" FromRole="PARTS" ToRole="MACHINES" />
           <NavigationProperty Name="MANUFACTURER" Relationship="Self.FK__PARTS__manufactu__6754599E" FromRole="PARTS" ToRole="MANUFACTURERS" />
           <NavigationProperty Name="OEM" Relationship="Self.FK__PARTS__oemid__693CA210" FromRole="PARTS" ToRole="OEMS" />
+          <NavigationProperty Name="ORDERS" Relationship="Self.FK_ORDERS_PARTS" FromRole="PARTS" ToRole="ORDERS" />
           <NavigationProperty Name="SUPPLIER" Relationship="Self.FK__PARTS__supplieri__68487DD7" FromRole="PARTS" ToRole="SUPPLIERS" />
           <NavigationProperty Name="UZAUTOSUPPLIER" Relationship="Self.FK_Parts_Uzautosuppliers" FromRole="PARTS" ToRole="UZAUTOSUPPLIERS" />
-          <Property Name="OEMPartNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="WH_INS" Relationship="Self.FK_WH_INS_PARTS" FromRole="PARTS" ToRole="WH_INS" />
+          <NavigationProperty Name="WH_OUTS" Relationship="Self.FK_WH_OUTS_PARTS" FromRole="PARTS" ToRole="WH_OUTS" />
+          <Property Name="IsDeleted" Type="Boolean" />
         </EntityType>
         <EntityType Name="PERMISSION">
           <Key>
@@ -543,6 +864,7 @@ warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key d
           <Property Name="PermissionName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Model" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ROLES" Relationship="Self.PERMISSIONROLES" FromRole="PERMISSIONS" ToRole="ROLES" />
+          <Property Name="IsDeleted" Type="Boolean" />
         </EntityType>
         <EntityType Name="ROLE">
           <Key>
@@ -554,6 +876,7 @@ warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key d
           <Property Name="IsAdmin" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="PERMISSIONS" Relationship="Self.PERMISSIONROLES" FromRole="ROLES" ToRole="PERMISSIONS" />
           <NavigationProperty Name="USERS" Relationship="Self.ROLEUSERS" FromRole="ROLES" ToRole="USERS" />
+          <Property Name="IsDeleted" Type="Boolean" />
         </EntityType>
         <EntityType Name="SUPPLIER">
           <Key>
@@ -568,6 +891,7 @@ warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key d
           <Property Name="TelephoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Website" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="PARTS" Relationship="Self.FK__PARTS__supplieri__68487DD7" FromRole="SUPPLIERS" ToRole="PARTS" />
+          <Property Name="IsDeleted" Type="Boolean" />
         </EntityType>
         <EntityType Name="USER">
           <Key>
@@ -582,10 +906,18 @@ warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key d
           <Property Name="Answer" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="IsOnline" Type="Boolean" />
           <Property Name="UzautosupplierID" Type="Int32" Nullable="false" />
+          <Property Name="Telephone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Department" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="JobTitle" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="LOGS" Relationship="Self.FK_LOGS_USERS" FromRole="USERS" ToRole="LOGS" />
+          <NavigationProperty Name="ORDERS" Relationship="Self.FK_ORDERS_USERS" FromRole="USERS" ToRole="ORDERS" />
           <NavigationProperty Name="UZAUTOSUPPLIER" Relationship="Self.FK__USERS__Uzautosupp" FromRole="USERS" ToRole="UZAUTOSUPPLIERS" />
           <NavigationProperty Name="USERSIMAGES" Relationship="Self.FK_USERSIMAGES_USERS" FromRole="USERS" ToRole="USERSIMAGES" />
+          <NavigationProperty Name="WAREHOUSES" Relationship="Self.FK_WAREHOUSES_USERS" FromRole="USERS" ToRole="WAREHOUSES" />
+          <NavigationProperty Name="WH_INS" Relationship="Self.FK_WH_INS_USERS" FromRole="USERS" ToRole="WH_INS" />
+          <NavigationProperty Name="WH_OUTS" Relationship="Self.FK_WH_OUTS_USERS" FromRole="USERS" ToRole="WH_OUTS" />
           <NavigationProperty Name="ROLES" Relationship="Self.ROLEUSERS" FromRole="USERS" ToRole="ROLES" />
+          <Property Name="IsDeleted" Type="Boolean" />
         </EntityType>
         <EntityType Name="USERSIMAGE">
           <Key>
@@ -608,8 +940,58 @@ warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key d
           <Property Name="ContactPerson" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="TelephoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="MACHINES" Relationship="Self.FK_MACHINES_UZAUTOSUPPLIERS1" FromRole="UZAUTOSUPPLIERS" ToRole="MACHINES" />
+          <NavigationProperty Name="ORDERS" Relationship="Self.FK__ORDERS__UzAutoSu__08B54D69" FromRole="UZAUTOSUPPLIERS" ToRole="ORDERS" />
           <NavigationProperty Name="PARTS" Relationship="Self.FK_Parts_Uzautosuppliers" FromRole="UZAUTOSUPPLIERS" ToRole="PARTS" />
           <NavigationProperty Name="USERS" Relationship="Self.FK__USERS__Uzautosupp" FromRole="UZAUTOSUPPLIERS" ToRole="USERS" />
+          <Property Name="IsDeleted" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Warehouse">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="WorkingPeriod" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="StockmanID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="USER" Relationship="Self.FK_WAREHOUSES_USERS" FromRole="WAREHOUSES" ToRole="USERS" />
+          <NavigationProperty Name="WH_INS" Relationship="Self.FK_WH_INS_WAREHOUSES" FromRole="WAREHOUSES" ToRole="WH_INS" />
+          <NavigationProperty Name="WH_OUTS" Relationship="Self.FK_WH_OUTS_WAREHOUSES" FromRole="WAREHOUSES" ToRole="WH_OUTS" />
+          <Property Name="IsDeleted" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="WH_INS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PartID" Type="Int32" Nullable="false" />
+          <Property Name="DateTime" Type="DateTime" Precision="3" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="WHID" Type="Int32" Nullable="false" />
+          <Property Name="MachineID" Type="Int32" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="MACHINE" Relationship="Self.FK_WH_INS_MACHINES" FromRole="WH_INS" ToRole="MACHINES" />
+          <NavigationProperty Name="PART" Relationship="Self.FK_WH_INS_PARTS" FromRole="WH_INS" ToRole="PARTS" />
+          <NavigationProperty Name="USER" Relationship="Self.FK_WH_INS_USERS" FromRole="WH_INS" ToRole="USERS" />
+          <NavigationProperty Name="Warehouse" Relationship="Self.FK_WH_INS_WAREHOUSES" FromRole="WH_INS" ToRole="WAREHOUSES" />
+          <Property Name="IsDeleted" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="WH_OUTS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PartID" Type="Int32" Nullable="false" />
+          <Property Name="DateTime" Type="DateTime" Precision="3" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="WHID" Type="Int32" Nullable="false" />
+          <Property Name="MachineID" Type="Int32" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="MACHINE" Relationship="Self.FK_WH_OUTS_MACHINES" FromRole="WH_OUTS" ToRole="MACHINES" />
+          <NavigationProperty Name="PART" Relationship="Self.FK_WH_OUTS_PARTS" FromRole="WH_OUTS" ToRole="PARTS" />
+          <NavigationProperty Name="USER" Relationship="Self.FK_WH_OUTS_USERS" FromRole="WH_OUTS" ToRole="USERS" />
+          <NavigationProperty Name="Warehouse" Relationship="Self.FK_WH_OUTS_WAREHOUSES" FromRole="WH_OUTS" ToRole="WAREHOUSES" />
+          <Property Name="IsDeleted" Type="Boolean" />
         </EntityType>
         <Association Name="FK_LOGS_USERS">
           <End Role="USERS" Type="Self.USER" Multiplicity="1" />
@@ -671,6 +1053,30 @@ warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key d
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_WH_INS_MACHINES">
+          <End Role="MACHINES" Type="Self.MACHINE" Multiplicity="1" />
+          <End Role="WH_INS" Type="Self.WH_INS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MACHINES">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WH_INS">
+              <PropertyRef Name="MachineID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WH_OUTS_MACHINES">
+          <End Role="MACHINES" Type="Self.MACHINE" Multiplicity="1" />
+          <End Role="WH_OUTS" Type="Self.WH_OUTS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MACHINES">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WH_OUTS">
+              <PropertyRef Name="MachineID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__PARTS__manufactu__6754599E">
           <End Role="MANUFACTURERS" Type="Self.MANUFACTURER" Multiplicity="1" />
           <End Role="PARTS" Type="Self.PART" Multiplicity="*" />
@@ -692,6 +1098,42 @@ warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key d
             </Principal>
             <Dependent Role="PARTS">
               <PropertyRef Name="OEMID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ORDERS__UzAutoSu__08B54D69">
+          <End Role="UZAUTOSUPPLIERS" Type="Self.UZAUTOSUPPLIER" Multiplicity="1" />
+          <End Role="ORDERS" Type="Self.ORDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UZAUTOSUPPLIERS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ORDERS">
+              <PropertyRef Name="UzAutoSupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ORDERS_PARTS">
+          <End Role="PARTS" Type="Self.PART" Multiplicity="1" />
+          <End Role="ORDERS" Type="Self.ORDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PARTS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ORDERS">
+              <PropertyRef Name="PartID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ORDERS_USERS">
+          <End Role="USERS" Type="Self.USER" Multiplicity="1" />
+          <End Role="ORDERS" Type="Self.ORDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ORDERS">
+              <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -719,6 +1161,30 @@ warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key d
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_WH_INS_PARTS">
+          <End Role="PARTS" Type="Self.PART" Multiplicity="1" />
+          <End Role="WH_INS" Type="Self.WH_INS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PARTS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WH_INS">
+              <PropertyRef Name="PartID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WH_OUTS_PARTS">
+          <End Role="PARTS" Type="Self.PART" Multiplicity="1" />
+          <End Role="WH_OUTS" Type="Self.WH_OUTS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PARTS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WH_OUTS">
+              <PropertyRef Name="PartID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__USERS__Uzautosupp">
           <End Role="UZAUTOSUPPLIERS" Type="Self.UZAUTOSUPPLIER" Multiplicity="1" />
           <End Role="USERS" Type="Self.USER" Multiplicity="*" />
@@ -743,6 +1209,66 @@ warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key d
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_WAREHOUSES_USERS">
+          <End Role="USERS" Type="Self.USER" Multiplicity="1" />
+          <End Role="WAREHOUSES" Type="Self.Warehouse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WAREHOUSES">
+              <PropertyRef Name="StockmanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WH_INS_USERS">
+          <End Role="USERS" Type="Self.USER" Multiplicity="1" />
+          <End Role="WH_INS" Type="Self.WH_INS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WH_INS">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WH_OUTS_USERS">
+          <End Role="USERS" Type="Self.USER" Multiplicity="1" />
+          <End Role="WH_OUTS" Type="Self.WH_OUTS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WH_OUTS">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WH_INS_WAREHOUSES">
+          <End Role="WAREHOUSES" Type="Self.Warehouse" Multiplicity="1" />
+          <End Role="WH_INS" Type="Self.WH_INS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WAREHOUSES">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WH_INS">
+              <PropertyRef Name="WHID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WH_OUTS_WAREHOUSES">
+          <End Role="WAREHOUSES" Type="Self.Warehouse" Multiplicity="1" />
+          <End Role="WH_OUTS" Type="Self.WH_OUTS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WAREHOUSES">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WH_OUTS">
+              <PropertyRef Name="WHID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="PERMISSIONROLES">
           <End Role="PERMISSIONS" Type="Self.PERMISSION" Multiplicity="*" />
           <End Role="ROLES" Type="Self.ROLE" Multiplicity="*" />
@@ -757,6 +1283,7 @@ warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key d
           <EntitySet Name="MACHINETYPES" EntityType="Self.MACHINETYPE" />
           <EntitySet Name="MANUFACTURERS" EntityType="Self.MANUFACTURER" />
           <EntitySet Name="OEMS" EntityType="Self.OEM" />
+          <EntitySet Name="ORDERS" EntityType="Self.ORDER" />
           <EntitySet Name="PARTS" EntityType="Self.PART" />
           <EntitySet Name="PERMISSIONS" EntityType="Self.PERMISSION" />
           <EntitySet Name="ROLES" EntityType="Self.ROLE" />
@@ -764,6 +1291,9 @@ warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key d
           <EntitySet Name="USERS" EntityType="Self.USER" />
           <EntitySet Name="USERSIMAGES" EntityType="Self.USERSIMAGE" />
           <EntitySet Name="UZAUTOSUPPLIERS" EntityType="Self.UZAUTOSUPPLIER" />
+          <EntitySet Name="WAREHOUSES" EntityType="Self.Warehouse" />
+          <EntitySet Name="WH_INS" EntityType="Self.WH_INS" />
+          <EntitySet Name="WH_OUTS" EntityType="Self.WH_OUTS" />
           <AssociationSet Name="FK_LOGS_USERS" Association="Self.FK_LOGS_USERS">
             <End Role="USERS" EntitySet="USERS" />
             <End Role="LOGS" EntitySet="LOGS" />
@@ -784,6 +1314,14 @@ warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key d
             <End Role="UZAUTOSUPPLIERS" EntitySet="UZAUTOSUPPLIERS" />
             <End Role="MACHINES" EntitySet="MACHINES" />
           </AssociationSet>
+          <AssociationSet Name="FK_WH_INS_MACHINES" Association="Self.FK_WH_INS_MACHINES">
+            <End Role="MACHINES" EntitySet="MACHINES" />
+            <End Role="WH_INS" EntitySet="WH_INS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WH_OUTS_MACHINES" Association="Self.FK_WH_OUTS_MACHINES">
+            <End Role="MACHINES" EntitySet="MACHINES" />
+            <End Role="WH_OUTS" EntitySet="WH_OUTS" />
+          </AssociationSet>
           <AssociationSet Name="FK__PARTS__manufactu__6754599E" Association="Self.FK__PARTS__manufactu__6754599E">
             <End Role="MANUFACTURERS" EntitySet="MANUFACTURERS" />
             <End Role="PARTS" EntitySet="PARTS" />
@@ -791,6 +1329,18 @@ warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key d
           <AssociationSet Name="FK__PARTS__oemid__693CA210" Association="Self.FK__PARTS__oemid__693CA210">
             <End Role="OEMS" EntitySet="OEMS" />
             <End Role="PARTS" EntitySet="PARTS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ORDERS__UzAutoSu__08B54D69" Association="Self.FK__ORDERS__UzAutoSu__08B54D69">
+            <End Role="UZAUTOSUPPLIERS" EntitySet="UZAUTOSUPPLIERS" />
+            <End Role="ORDERS" EntitySet="ORDERS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ORDERS_PARTS" Association="Self.FK_ORDERS_PARTS">
+            <End Role="PARTS" EntitySet="PARTS" />
+            <End Role="ORDERS" EntitySet="ORDERS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ORDERS_USERS" Association="Self.FK_ORDERS_USERS">
+            <End Role="USERS" EntitySet="USERS" />
+            <End Role="ORDERS" EntitySet="ORDERS" />
           </AssociationSet>
           <AssociationSet Name="FK__PARTS__supplieri__68487DD7" Association="Self.FK__PARTS__supplieri__68487DD7">
             <End Role="SUPPLIERS" EntitySet="SUPPLIERS" />
@@ -800,6 +1350,14 @@ warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key d
             <End Role="UZAUTOSUPPLIERS" EntitySet="UZAUTOSUPPLIERS" />
             <End Role="PARTS" EntitySet="PARTS" />
           </AssociationSet>
+          <AssociationSet Name="FK_WH_INS_PARTS" Association="Self.FK_WH_INS_PARTS">
+            <End Role="PARTS" EntitySet="PARTS" />
+            <End Role="WH_INS" EntitySet="WH_INS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WH_OUTS_PARTS" Association="Self.FK_WH_OUTS_PARTS">
+            <End Role="PARTS" EntitySet="PARTS" />
+            <End Role="WH_OUTS" EntitySet="WH_OUTS" />
+          </AssociationSet>
           <AssociationSet Name="FK__USERS__Uzautosupp" Association="Self.FK__USERS__Uzautosupp">
             <End Role="UZAUTOSUPPLIERS" EntitySet="UZAUTOSUPPLIERS" />
             <End Role="USERS" EntitySet="USERS" />
@@ -807,6 +1365,26 @@ warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key d
           <AssociationSet Name="FK_USERSIMAGES_USERS" Association="Self.FK_USERSIMAGES_USERS">
             <End Role="USERS" EntitySet="USERS" />
             <End Role="USERSIMAGES" EntitySet="USERSIMAGES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WAREHOUSES_USERS" Association="Self.FK_WAREHOUSES_USERS">
+            <End Role="USERS" EntitySet="USERS" />
+            <End Role="WAREHOUSES" EntitySet="WAREHOUSES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WH_INS_USERS" Association="Self.FK_WH_INS_USERS">
+            <End Role="USERS" EntitySet="USERS" />
+            <End Role="WH_INS" EntitySet="WH_INS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WH_OUTS_USERS" Association="Self.FK_WH_OUTS_USERS">
+            <End Role="USERS" EntitySet="USERS" />
+            <End Role="WH_OUTS" EntitySet="WH_OUTS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WH_INS_WAREHOUSES" Association="Self.FK_WH_INS_WAREHOUSES">
+            <End Role="WAREHOUSES" EntitySet="WAREHOUSES" />
+            <End Role="WH_INS" EntitySet="WH_INS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WH_OUTS_WAREHOUSES" Association="Self.FK_WH_OUTS_WAREHOUSES">
+            <End Role="WAREHOUSES" EntitySet="WAREHOUSES" />
+            <End Role="WH_OUTS" EntitySet="WH_OUTS" />
           </AssociationSet>
           <AssociationSet Name="PERMISSIONROLES" Association="Self.PERMISSIONROLES">
             <End Role="PERMISSIONS" EntitySet="PERMISSIONS" />
@@ -826,6 +1404,7 @@ warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key d
           <EntitySetMapping Name="LOGS">
             <EntityTypeMapping TypeName="DBEPRModel.LOG">
               <MappingFragment StoreEntitySet="LOGS">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Form" ColumnName="Form" />
                 <ScalarProperty Name="Operation" ColumnName="Operation" />
@@ -839,7 +1418,7 @@ warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key d
           <EntitySetMapping Name="MACHINES">
             <EntityTypeMapping TypeName="DBEPRModel.MACHINE">
               <MappingFragment StoreEntitySet="MACHINES">
-                <ScalarProperty Name="PartNumber" ColumnName="PartNumber" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="UzAutoSupplierID" ColumnName="UzAutoSupplierID" />
@@ -849,12 +1428,14 @@ warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key d
                 <ScalarProperty Name="InstalledDate" ColumnName="InstalledDate" />
                 <ScalarProperty Name="TypeID" ColumnName="TypeID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PartNumber" ColumnName="PartNumber" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="MACHINETYPES">
             <EntityTypeMapping TypeName="DBEPRModel.MACHINETYPE">
               <MappingFragment StoreEntitySet="MACHINETYPES">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -864,6 +1445,7 @@ warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key d
           <EntitySetMapping Name="MANUFACTURERS">
             <EntityTypeMapping TypeName="DBEPRModel.MANUFACTURER">
               <MappingFragment StoreEntitySet="MANUFACTURERS">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
@@ -879,6 +1461,7 @@ warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key d
           <EntitySetMapping Name="OEMS">
             <EntityTypeMapping TypeName="DBEPRModel.OEM">
               <MappingFragment StoreEntitySet="OEMS">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
@@ -891,10 +1474,31 @@ warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key d
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ORDERS">
+            <EntityTypeMapping TypeName="DBEPRModel.ORDER">
+              <MappingFragment StoreEntitySet="ORDERS">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="PartID" ColumnName="PartID" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="TechnicalTask" ColumnName="TechnicalTask" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Specification" ColumnName="Specification" />
+                <ScalarProperty Name="CurrentPartPrice" ColumnName="CurrentPartPrice" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="UzAutoSupplierID" ColumnName="UzAutoSupplierID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="PARTS">
             <EntityTypeMapping TypeName="DBEPRModel.PART">
               <MappingFragment StoreEntitySet="PARTS">
-                <ScalarProperty Name="OEMPartNumber" ColumnName="OEMPartNumber" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -907,12 +1511,24 @@ warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key d
                 <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
                 <ScalarProperty Name="OEMID" ColumnName="OEMID" />
                 <ScalarProperty Name="MachineID" ColumnName="MachineID" />
+                <ScalarProperty Name="OEMPartNumber" ColumnName="OEMPartNumber" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+                <ScalarProperty Name="Manufactured_Date" ColumnName="Manufactured Date" />
+                <ScalarProperty Name="NameRus" ColumnName="NameRus" />
+                <ScalarProperty Name="DescriptionRus" ColumnName="DescriptionRus" />
+                <ScalarProperty Name="TechData" ColumnName="TechData" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PERMISSIONS">
             <EntityTypeMapping TypeName="DBEPRModel.PERMISSION">
               <MappingFragment StoreEntitySet="PERMISSIONS">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="PermissionName" ColumnName="PermissionName" />
                 <ScalarProperty Name="Model" ColumnName="Model" />
@@ -922,6 +1538,7 @@ warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key d
           <EntitySetMapping Name="ROLES">
             <EntityTypeMapping TypeName="DBEPRModel.ROLE">
               <MappingFragment StoreEntitySet="ROLES">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="RoleName" ColumnName="RoleName" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -932,6 +1549,7 @@ warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key d
           <EntitySetMapping Name="SUPPLIERS">
             <EntityTypeMapping TypeName="DBEPRModel.SUPPLIER">
               <MappingFragment StoreEntitySet="SUPPLIERS">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Country" ColumnName="Country" />
@@ -946,6 +1564,7 @@ warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key d
           <EntitySetMapping Name="USERS">
             <EntityTypeMapping TypeName="DBEPRModel.USER">
               <MappingFragment StoreEntitySet="USERS">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -955,6 +1574,9 @@ warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key d
                 <ScalarProperty Name="Answer" ColumnName="Answer" />
                 <ScalarProperty Name="IsOnline" ColumnName="IsOnline" />
                 <ScalarProperty Name="UzautosupplierID" ColumnName="UzautosupplierID" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -970,6 +1592,7 @@ warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key d
           <EntitySetMapping Name="UZAUTOSUPPLIERS">
             <EntityTypeMapping TypeName="DBEPRModel.UZAUTOSUPPLIER">
               <MappingFragment StoreEntitySet="UZAUTOSUPPLIERS">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Country" ColumnName="Country" />
@@ -977,6 +1600,46 @@ warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key d
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
                 <ScalarProperty Name="TelephoneNumber" ColumnName="TelephoneNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WAREHOUSES">
+            <EntityTypeMapping TypeName="DBEPRModel.Warehouse">
+              <MappingFragment StoreEntitySet="WAREHOUSES">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="WorkingPeriod" ColumnName="WorkingPeriod" />
+                <ScalarProperty Name="StockmanID" ColumnName="StockmanID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WH_INS">
+            <EntityTypeMapping TypeName="DBEPRModel.WH_INS">
+              <MappingFragment StoreEntitySet="WH_INS">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PartID" ColumnName="PartID" />
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="WHID" ColumnName="WHID" />
+                <ScalarProperty Name="MachineID" ColumnName="MachineID" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WH_OUTS">
+            <EntityTypeMapping TypeName="DBEPRModel.WH_OUTS">
+              <MappingFragment StoreEntitySet="WH_OUTS">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PartID" ColumnName="PartID" />
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="WHID" ColumnName="WHID" />
+                <ScalarProperty Name="MachineID" ColumnName="MachineID" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

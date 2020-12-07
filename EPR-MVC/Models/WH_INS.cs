@@ -12,20 +12,20 @@ namespace EPR_MVC.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class PERMISSION
+    public partial class WH_INS
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public PERMISSION()
-        {
-            this.ROLES = new HashSet<ROLE>();
-        }
-    
         public int ID { get; set; }
-        public string PermissionName { get; set; }
-        public string Model { get; set; }
+        public int PartID { get; set; }
+        public Nullable<System.DateTime> DateTime { get; set; }
+        public int UserID { get; set; }
+        public int WHID { get; set; }
+        public int MachineID { get; set; }
+        public string Comment { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ROLE> ROLES { get; set; }
+        public virtual MACHINE MACHINE { get; set; }
+        public virtual PART PART { get; set; }
+        public virtual USER USER { get; set; }
+        public virtual Warehouse Warehouse { get; set; }
     }
 }

@@ -4,30 +4,46 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="18e0fce275204f658a19af677e1c46a5" Name="Diagram1">
-        <EntityTypeShape EntityType="DBEPRModel.LOG" Width="1.5" PointX="12.625" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBEPRModel.MACHINE" Width="1.5" PointX="2.625" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBEPRModel.MACHINETYPE" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBEPRModel.MANUFACTURER" Width="1.5" PointX="8.125" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBEPRModel.OEM" Width="1.5" PointX="12.125" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBEPRModel.PART" Width="1.5" PointX="5.5" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBEPRModel.PERMISSION" Width="1.5" PointX="2.25" PointY="10.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBEPRModel.ROLE" Width="1.5" PointX="4.625" PointY="10.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBEPRModel.SUPPLIER" Width="1.5" PointX="10.125" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBEPRModel.USER" Width="1.5" PointX="7.125" PointY="9.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBEPRModel.USERSIMAGE" Width="1.5" PointX="9.25" PointY="11.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBEPRModel.UZAUTOSUPPLIER" Width="1.5" PointX="6.75" PointY="5.25" IsExpanded="true" />
+      <Diagram DiagramId="ac6c87349ec24ae09fa777a88182489a" Name="Diagram1" ZoomLevel="71">
+        <EntityTypeShape EntityType="DBEPRModel.LOG" Width="1.5" PointX="8" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBEPRModel.MACHINE" Width="1.5" PointX="5.125" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBEPRModel.MACHINETYPE" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBEPRModel.MANUFACTURER" Width="1.5" PointX="0.5" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBEPRModel.OEM" Width="1.5" PointX="14.25" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBEPRModel.ORDER" Width="1.5" PointX="17.375" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBEPRModel.PART" Width="1.5" PointX="9" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBEPRModel.PERMISSION" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBEPRModel.ROLE" Width="1.5" PointX="3.375" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBEPRModel.SUPPLIER" Width="1.5" PointX="12" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBEPRModel.USER" Width="1.5" PointX="3.375" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBEPRModel.USERSIMAGE" Width="1.5" PointX="5.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBEPRModel.UZAUTOSUPPLIER" Width="1.5" PointX="2.875" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBEPRModel.Warehouse" Width="1.5" PointX="9.125" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBEPRModel.WH_INS" Width="1.5" PointX="6" PointY="18.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBEPRModel.WH_OUTS" Width="1.5" PointX="12" PointY="18.5" IsExpanded="true" />
         <AssociationConnector Association="DBEPRModel.FK_LOGS_USERS" ManuallyRouted="false" />
         <AssociationConnector Association="DBEPRModel.FK__MACHINES__TypeID__73BA3083" ManuallyRouted="false" />
         <AssociationConnector Association="DBEPRModel.FK__PARTS__MachineID__75A278F5" ManuallyRouted="false" />
         <AssociationConnector Association="DBEPRModel.FK_MACHINES_MANUFACTURERS1" ManuallyRouted="false" />
         <AssociationConnector Association="DBEPRModel.FK_MACHINES_UZAUTOSUPPLIERS1" ManuallyRouted="false" />
+        <AssociationConnector Association="DBEPRModel.FK_WH_INS_MACHINES" ManuallyRouted="false" />
+        <AssociationConnector Association="DBEPRModel.FK_WH_OUTS_MACHINES" ManuallyRouted="false" />
         <AssociationConnector Association="DBEPRModel.FK__PARTS__manufactu__6754599E" ManuallyRouted="false" />
         <AssociationConnector Association="DBEPRModel.FK__PARTS__oemid__693CA210" ManuallyRouted="false" />
+        <AssociationConnector Association="DBEPRModel.FK__ORDERS__UzAutoSu__08B54D69" ManuallyRouted="false" />
+        <AssociationConnector Association="DBEPRModel.FK_ORDERS_PARTS" ManuallyRouted="false" />
+        <AssociationConnector Association="DBEPRModel.FK_ORDERS_USERS" ManuallyRouted="false" />
         <AssociationConnector Association="DBEPRModel.FK__PARTS__supplieri__68487DD7" ManuallyRouted="false" />
         <AssociationConnector Association="DBEPRModel.FK_Parts_Uzautosuppliers" ManuallyRouted="false" />
+        <AssociationConnector Association="DBEPRModel.FK_WH_INS_PARTS" ManuallyRouted="false" />
+        <AssociationConnector Association="DBEPRModel.FK_WH_OUTS_PARTS" ManuallyRouted="false" />
         <AssociationConnector Association="DBEPRModel.FK__USERS__Uzautosupp" ManuallyRouted="false" />
         <AssociationConnector Association="DBEPRModel.FK_USERSIMAGES_USERS" ManuallyRouted="false" />
+        <AssociationConnector Association="DBEPRModel.FK_WAREHOUSES_USERS" ManuallyRouted="false" />
+        <AssociationConnector Association="DBEPRModel.FK_WH_INS_USERS" ManuallyRouted="false" />
+        <AssociationConnector Association="DBEPRModel.FK_WH_OUTS_USERS" ManuallyRouted="false" />
+        <AssociationConnector Association="DBEPRModel.FK_WH_INS_WAREHOUSES" ManuallyRouted="false" />
+        <AssociationConnector Association="DBEPRModel.FK_WH_OUTS_WAREHOUSES" ManuallyRouted="false" />
         <AssociationConnector Association="DBEPRModel.PERMISSIONROLES" ManuallyRouted="false" />
         <AssociationConnector Association="DBEPRModel.ROLEUSERS" ManuallyRouted="false" />
       </Diagram>
