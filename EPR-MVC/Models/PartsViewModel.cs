@@ -18,7 +18,7 @@ namespace EPR_MVC.Models
         public int OEMID { get; set; }
         public int MachineID { get; set; }
         public string OEMPartNumber { get; set; }
-        public string Model { get; set; }
+        public string Modeli { get; set; }
         public string Type { get; set; }
         public string SerialNumber { get; set; }
         public DateTime? Manufactured_Date { get; set; }

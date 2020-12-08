@@ -1,7 +1,7 @@
 ﻿@model EPR_MVC.Models.MachinesViewModel
 <html>
 <head>
-   
+
 </head>
 <body class="vertical-layout vertical-menu-modern 2-columns  navbar-sticky footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
 
@@ -62,7 +62,7 @@
                                     <tbody>
                                         @foreach (var machine in Model.machineList)
                                         {
-                                            <tr>
+                                            <tr id="row_@machine.ID">
                                                 <td>@machine.Name </td>
                                                 <td>@machine.Description </td>
                                                 <td>@machine.PartNumber </td>
@@ -73,14 +73,18 @@
                                                 {
                                                     <td class="text-success">Faoliyatda</td>
                                                 }
+                                                else
+                                                {
+                                                    <td class="text-danger">Ishlamayabdi</td>
+                                                }
                                                 <td>@machine.MANUFACTURER.Name</td>
                                                 <td>@machine.UZAUTOSUPPLIER.Name </td>
                                                 <td>
                                                     <div class="dropdown">
                                                         <span class="bx bx-dots-vertical-rounded font-medium-3 dropdown-toggle nav-hide-arrow cursor-pointer" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="menu"></span>
                                                         <div class="dropdown-menu dropdown-menu-right">
-                                                            <a class="dropdown-item" href="#"><i class="bx bx-edit-alt mr-1"></i> o'zgartirish</a>
-                                                            <a class="dropdown-item" href="#"><i class="bx bx-trash mr-1"></i> o'chirish</a>
+                                                            <a class="dropdown-item" href="#" onclick="Edit(@machine.ID)"><i class="bx bx-edit-alt mr-1"></i> o'zgartirish</a>
+                                                            <a class="dropdown-item" href="#" onclick="ConfirmDelete(@machine.ID)"><i class="bx bx-trash mr-1"></i> o'chirish</a>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -90,11 +94,14 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <input type="hidden" id="hiddenID" />
+                            <!-- datatable ends -->
+                            <!-- MODALS -->
                             <div class="modal fade text-left modal-borderless" id="full-scrn" tabindex="-1" role="dialog" aria-labelledby="myModalLabel20" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-scrollable" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h4 class="modal-title" id="myModalLabel33">Material qo'shish </h4>
+                                            <h4 class="modal-title" id="myModalLabel33">Uskuna qo'shish </h4>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <i class="bx bx-x"></i>
                                             </button>
@@ -132,8 +139,32 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- datatable ends -->
+                            <div class="modal fade text-left" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel120" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header bg-danger">
+                                            <h5 class="modal-title white" id="myModalLabel120">Ishongchingiz komilmi?</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <i class="bx bx-x"></i>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Uskunani o'chirganingizdan keyin qayta tiklash murakkab bo'lib ketadi. Aniq ishonch xosil qilmagan bo'lsangiz
+                                            "yopish" tugmasini bosing.
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-light-secondary" data-dismiss="modal">
+                                                <i class="bx bx-x d-block d-sm-none"></i>
+                                                <span class="d-none d-sm-block">Yopish</span>
+                                            </button>
+                                            <button type="button" class="btn btn-danger ml-1" data-dismiss="modal">
+                                                <i class="bx bx-check d-block d-sm-none"></i>
+                                                <span class="d-none d-sm-block" onclick="Delete()">O'chirish</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </section>
                 </div>
@@ -142,10 +173,9 @@
         <script src="~/Scripts/Fresta/app-assets/js/core/libraries/jquery.min.js"></script>
         <script>
             $(document).ready(function () {
-                
+
                 $("#btnSubmit").click(function () {
                     var formData = $("#modalForm").serialize();
-
                     $.ajax({
                         type: "POST",
                         url: "/Database/MachinesInsert",
@@ -161,6 +191,28 @@
                     $("#full-scrn").modal("hide");
                 })
             })
+            var ConfirmDelete = function (PartID) {
+                $("#hiddenID").val(PartID);
+                $("#deleteModal").modal("show");
+            }
+
+            var Delete = function () {
+                var mID = $("#hiddenID").val();
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Database/MachinesDelete",
+                    data: { MachineID: mID },
+                    success: function () {
+                        $("#deleteModal").modal("hide");
+                        $("#row_" + mID).remove();
+                    }
+                })
+            }
+
+            var Edit = function (PartID) {
+                $("#hiddenID").val(PartID);
+            }
         </script>
     }
 </body>

@@ -93,6 +93,22 @@
           <Property Name="UzAutoSupplierID" Type="int" Nullable="false" />
           <Property Name="IsDeleted" Type="bit" />
         </EntityType>
+        <EntityType Name="PARTIMAGES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Image" Type="image" />
+          <Property Name="PartID" Type="int" />
+        </EntityType>
+        <EntityType Name="PARTNAMEPLATES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nameplate" Type="image" Nullable="false" />
+          <Property Name="PartID" Type="int" />
+        </EntityType>
         <EntityType Name="PARTS">
           <Key>
             <PropertyRef Name="ID" />
@@ -102,15 +118,13 @@
           <Property Name="Name" Type="varchar" MaxLength="50" />
           <Property Name="Description" Type="text" />
           <Property Name="PartNumber" Type="varchar" MaxLength="15" />
-          <Property Name="Photo" Type="image" />
           <Property Name="UzAutoSupplierID" Type="int" Nullable="false" />
-          <Property Name="NamePlate" Type="image" />
           <Property Name="ManufacturerID" Type="int" Nullable="false" />
           <Property Name="SupplierID" Type="int" Nullable="false" />
           <Property Name="OEMID" Type="int" Nullable="false" />
           <Property Name="MachineID" Type="int" Nullable="false" />
           <Property Name="OEMPartNumber" Type="varchar" MaxLength="30" />
-          <Property Name="Model" Type="varchar" MaxLength="20" />
+          <Property Name="Modeli" Type="varchar" MaxLength="20" />
           <Property Name="Type" Type="varchar" MaxLength="20" />
           <Property Name="SerialNumber" Type="varchar" MaxLength="50" />
           <Property Name="Manufactured Date" Type="date" />
@@ -395,6 +409,30 @@ warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key d
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PARTIMAGES_PARTS">
+          <End Role="PARTS" Type="Self.PARTS" Multiplicity="0..1" />
+          <End Role="PARTNAMEPLATES" Type="Self.PARTNAMEPLATES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PARTS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PARTNAMEPLATES">
+              <PropertyRef Name="PartID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PARTIMAGES_PARTS1">
+          <End Role="PARTS" Type="Self.PARTS" Multiplicity="0..1" />
+          <End Role="PARTIMAGES" Type="Self.PARTIMAGES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PARTS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PARTIMAGES">
+              <PropertyRef Name="PartID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Parts_Uzautosuppliers">
           <End Role="UZAUTOSUPPLIERS" Type="Self.UZAUTOSUPPLIERS" Multiplicity="1" />
           <End Role="PARTS" Type="Self.PARTS" Multiplicity="*" />
@@ -582,6 +620,8 @@ warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key d
           <EntitySet Name="MANUFACTURERS" EntityType="Self.MANUFACTURERS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OEMS" EntityType="Self.OEMS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ORDERS" EntityType="Self.ORDERS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PARTIMAGES" EntityType="Self.PARTIMAGES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PARTNAMEPLATES" EntityType="Self.PARTNAMEPLATES" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PARTS" EntityType="Self.PARTS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PERMISSIONS" EntityType="Self.PERMISSIONS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ROLES" EntityType="Self.ROLES" Schema="dbo" store:Type="Tables" />
@@ -651,6 +691,14 @@ warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key d
           <AssociationSet Name="FK_ORDERS_USERS" Association="Self.FK_ORDERS_USERS">
             <End Role="USERS" EntitySet="USERS" />
             <End Role="ORDERS" EntitySet="ORDERS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PARTIMAGES_PARTS" Association="Self.FK_PARTIMAGES_PARTS">
+            <End Role="PARTS" EntitySet="PARTS" />
+            <End Role="PARTNAMEPLATES" EntitySet="PARTNAMEPLATES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PARTIMAGES_PARTS1" Association="Self.FK_PARTIMAGES_PARTS1">
+            <End Role="PARTS" EntitySet="PARTS" />
+            <End Role="PARTIMAGES" EntitySet="PARTIMAGES" />
           </AssociationSet>
           <AssociationSet Name="FK_Parts_Uzautosuppliers" Association="Self.FK_Parts_Uzautosuppliers">
             <End Role="UZAUTOSUPPLIERS" EntitySet="UZAUTOSUPPLIERS" />
@@ -828,15 +876,12 @@ warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key d
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="PartNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="UzAutoSupplierID" Type="Int32" Nullable="false" />
-          <Property Name="NamePlate" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="ManufacturerID" Type="Int32" Nullable="false" />
           <Property Name="SupplierID" Type="Int32" Nullable="false" />
           <Property Name="OEMID" Type="Int32" Nullable="false" />
           <Property Name="MachineID" Type="Int32" Nullable="false" />
           <Property Name="OEMPartNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="Model" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Type" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="SerialNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Manufactured_Date" Type="DateTime" Precision="0" />
@@ -855,6 +900,9 @@ warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key d
           <NavigationProperty Name="WH_INS" Relationship="Self.FK_WH_INS_PARTS" FromRole="PARTS" ToRole="WH_INS" />
           <NavigationProperty Name="WH_OUTS" Relationship="Self.FK_WH_OUTS_PARTS" FromRole="PARTS" ToRole="WH_OUTS" />
           <Property Name="IsDeleted" Type="Boolean" />
+          <NavigationProperty Name="PARTIMAGES" Relationship="DBEPRModel.FK_PARTIMAGES_PARTS1" FromRole="PART" ToRole="PARTIMAGE" />
+          <NavigationProperty Name="PARTNAMEPLATES" Relationship="DBEPRModel.FK_PARTIMAGES_PARTS" FromRole="PART" ToRole="PARTNAMEPLATE" />
+          <Property Name="Modeli" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="PERMISSION">
           <Key>
@@ -1394,7 +1442,59 @@ warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key d
             <End Role="ROLES" EntitySet="ROLES" />
             <End Role="USERS" EntitySet="USERS" />
           </AssociationSet>
+          <EntitySet Name="PARTIMAGES" EntityType="DBEPRModel.PARTIMAGE" />
+          <EntitySet Name="PARTNAMEPLATES" EntityType="DBEPRModel.PARTNAMEPLATE" />
+          <AssociationSet Name="FK_PARTIMAGES_PARTS1" Association="DBEPRModel.FK_PARTIMAGES_PARTS1">
+            <End Role="PART" EntitySet="PARTS" />
+            <End Role="PARTIMAGE" EntitySet="PARTIMAGES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PARTIMAGES_PARTS" Association="DBEPRModel.FK_PARTIMAGES_PARTS">
+            <End Role="PART" EntitySet="PARTS" />
+            <End Role="PARTNAMEPLATE" EntitySet="PARTNAMEPLATES" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="PARTIMAGE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="PartID" Type="Int32" />
+          <NavigationProperty Name="PART" Relationship="DBEPRModel.FK_PARTIMAGES_PARTS1" FromRole="PARTIMAGE" ToRole="PART" />
+        </EntityType>
+        <EntityType Name="PARTNAMEPLATE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nameplate" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="PartID" Type="Int32" />
+          <NavigationProperty Name="PART" Relationship="DBEPRModel.FK_PARTIMAGES_PARTS" FromRole="PARTNAMEPLATE" ToRole="PART" />
+        </EntityType>
+        <Association Name="FK_PARTIMAGES_PARTS1">
+          <End Type="DBEPRModel.PART" Role="PART" Multiplicity="0..1" />
+          <End Type="DBEPRModel.PARTIMAGE" Role="PARTIMAGE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PART">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PARTIMAGE">
+              <PropertyRef Name="PartID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PARTIMAGES_PARTS">
+          <End Type="DBEPRModel.PART" Role="PART" Multiplicity="0..1" />
+          <End Type="DBEPRModel.PARTNAMEPLATE" Role="PARTNAMEPLATE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PART">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PARTNAMEPLATE">
+              <PropertyRef Name="PartID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1498,21 +1598,19 @@ warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key d
           <EntitySetMapping Name="PARTS">
             <EntityTypeMapping TypeName="DBEPRModel.PART">
               <MappingFragment StoreEntitySet="PARTS">
+                <ScalarProperty Name="Modeli" ColumnName="Modeli" />
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="PartNumber" ColumnName="PartNumber" />
-                <ScalarProperty Name="Photo" ColumnName="Photo" />
                 <ScalarProperty Name="UzAutoSupplierID" ColumnName="UzAutoSupplierID" />
-                <ScalarProperty Name="NamePlate" ColumnName="NamePlate" />
                 <ScalarProperty Name="ManufacturerID" ColumnName="ManufacturerID" />
                 <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
                 <ScalarProperty Name="OEMID" ColumnName="OEMID" />
                 <ScalarProperty Name="MachineID" ColumnName="MachineID" />
                 <ScalarProperty Name="OEMPartNumber" ColumnName="OEMPartNumber" />
-                <ScalarProperty Name="Model" ColumnName="Model" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
                 <ScalarProperty Name="Manufactured_Date" ColumnName="Manufactured Date" />
@@ -1659,6 +1757,24 @@ warning 6002: The table/view 'DBEPR.dbo.ROLEUSERS' does not have a primary key d
               <ScalarProperty Name="ID" ColumnName="UserID" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="PARTIMAGES">
+            <EntityTypeMapping TypeName="DBEPRModel.PARTIMAGE">
+              <MappingFragment StoreEntitySet="PARTIMAGES">
+                <ScalarProperty Name="PartID" ColumnName="PartID" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PARTNAMEPLATES">
+            <EntityTypeMapping TypeName="DBEPRModel.PARTNAMEPLATE">
+              <MappingFragment StoreEntitySet="PARTNAMEPLATES">
+                <ScalarProperty Name="PartID" ColumnName="PartID" />
+                <ScalarProperty Name="Nameplate" ColumnName="Nameplate" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

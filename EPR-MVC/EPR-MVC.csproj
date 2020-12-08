@@ -170,6 +170,12 @@
     <Compile Include="Models\PART.cs">
       <DependentUpon>DBEPRModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PARTIMAGE.cs">
+      <DependentUpon>DBEPRModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PARTNAMEPLATE.cs">
+      <DependentUpon>DBEPRModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\PartsViewModel.cs" />
     <Compile Include="Models\PERMISSION.cs">
       <DependentUpon>DBEPRModel.tt</DependentUpon>
@@ -2204,8 +2210,8 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Auth.cshtml" />
-    <Content Include="Views\Database\Parts.cshtml" />
     <Content Include="Views\Database\Machines.cshtml" />
+    <Content Include="Views\Database\Parts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -46,6 +46,10 @@
         <AssociationConnector Association="DBEPRModel.FK_WH_OUTS_WAREHOUSES" ManuallyRouted="false" />
         <AssociationConnector Association="DBEPRModel.PERMISSIONROLES" ManuallyRouted="false" />
         <AssociationConnector Association="DBEPRModel.ROLEUSERS" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DBEPRModel.PARTIMAGE" Width="1.5" PointX="11.125" PointY="8.375" />
+        <EntityTypeShape EntityType="DBEPRModel.PARTNAMEPLATE" Width="1.5" PointX="7.25" PointY="8.375" />
+        <AssociationConnector Association="DBEPRModel.FK_PARTIMAGES_PARTS1" />
+        <AssociationConnector Association="DBEPRModel.FK_PARTIMAGES_PARTS" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

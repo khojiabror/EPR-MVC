@@ -31,7 +31,7 @@ namespace EPR_MVC.Controllers
             }
         }
         [HttpPost]
-        public ActionResult Parts(PartsViewModel model)
+        public ActionResult PartsInsert(PartsViewModel model)
         {
             using (DBEPREntities db = new DBEPREntities())
             {
@@ -47,10 +47,10 @@ namespace EPR_MVC.Controllers
                 p.UzAutoSupplierID = model.UzAutoSupplierID;
                 p.PartNumber = model.PartNumber;
                 p.OEMPartNumber = model.OEMPartNumber;
-                p.NamePlate = model.NamePlate;
+                //p.NamePlate = model.NamePlate;
                 p.Name = model.Name;
                 p.NameRus = model.NameRus;
-                p.Model = model.Model;
+                p.Modeli = model.Modeli;
                 p.Type = model.Type;
                 p.SerialNumber = model.SerialNumber;
                 p.Manufactured_Date = model.Manufactured_Date;
@@ -58,6 +58,7 @@ namespace EPR_MVC.Controllers
                 p.Unit = model.Unit;
                 p.Price = model.Price;
                 p.Currency = model.Currency;
+                p.IsDeleted = false;
 
                 db.PARTS.Add(p);
                 db.SaveChanges();
@@ -65,8 +66,7 @@ namespace EPR_MVC.Controllers
                 return RedirectToAction("Parts");
             }
         }
-        [HttpPost]
-        public ActionResult PartsDelete(int PartID)
+        public JsonResult PartsDelete(int PartID)
         {
             bool result = false;
             using (DBEPREntities db = new DBEPREntities())
@@ -86,7 +86,7 @@ namespace EPR_MVC.Controllers
             using (DBEPREntities db = new DBEPREntities())
             {
                 MachinesViewModel mvm = new MachinesViewModel();
-                mvm.machineList = db.MACHINES.Include("MACHINETYPE").Include("UZAUTOSUPPLIER").Include("MANUFACTURER").ToList(); ;
+                mvm.machineList = db.MACHINES.Include("MACHINETYPE").Include("UZAUTOSUPPLIER").Include("MANUFACTURER").Where(m => m.IsDeleted == false).ToList();
 
                 List<MANUFACTURER> manList = db.MANUFACTURERS.ToList();
                 ViewBag.ManufacturerList = new SelectList(manList, "ID", "Name");
@@ -94,7 +94,6 @@ namespace EPR_MVC.Controllers
                 ViewBag.typeList = new SelectList(tList, "ID", "Name");
                 List<UZAUTOSUPPLIER> uList = db.UZAUTOSUPPLIERS.ToList();
                 ViewBag.UzAutoSupplierList = new SelectList(uList, "ID", "Name");
-                ViewBag.StatusList = new string[] { "Faoliyatda", "Ishlamayabdi" };
 
                 return View(mvm);
             }
@@ -110,13 +109,36 @@ namespace EPR_MVC.Controllers
                 machine.Description = model.Description;
                 machine.Lifespan = model.Lifespan;
                 machine.InstalledDate = model.InstalledDate;
+                machine.PartNumber = model.PartNumber;
                 if (model.Status)
                     machine.IsActive = true;
                 else
                     machine.IsActive = false;
+                machine.ManufacturerID = model.ManufacturerID;
+                machine.UzAutoSupplierID = model.UzAutoSupplierID;
+                machine.TypeID = model.TypeID;
+                machine.IsDeleted = false;
+
+                db.MACHINES.Add(machine);
+                db.SaveChanges();
 
                 return RedirectToAction("Machines");
             }
+        }
+        public JsonResult MachinesDelete(int MachineID)
+        {
+            bool result = false;
+            using (DBEPREntities db = new DBEPREntities())
+            {
+                MACHINE machine = db.MACHINES.SingleOrDefault(p => p.IsDeleted == false && p.ID == MachineID);
+                if (machine != null)
+                {
+                    machine.IsDeleted = true;
+                    db.SaveChanges();
+                    result = true;
+                }
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }
