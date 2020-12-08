@@ -41,5 +41,7 @@ namespace EPR_MVC.Models
         public virtual DbSet<Warehouse> WAREHOUSES { get; set; }
         public virtual DbSet<WH_INS> WH_INS { get; set; }
         public virtual DbSet<WH_OUTS> WH_OUTS { get; set; }
+        public virtual DbSet<PARTIMAGE> PARTIMAGES { get; set; }
+        public virtual DbSet<PARTNAMEPLATE> PARTNAMEPLATES { get; set; }
     }
 }

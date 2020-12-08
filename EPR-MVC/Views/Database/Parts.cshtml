@@ -1,7 +1,7 @@
 ﻿@model EPR_MVC.Models.PartsViewModel
-
 <html>
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body class="vertical-layout vertical-menu-modern 2-columns  navbar-sticky footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
 
@@ -36,9 +36,7 @@
                     </div>
                     <section id="table-success">
                         <ul class="list-inline mb-0">
-                            <li class="ml-2"><button class="btn btn-primary" data-toggle="modal" data-target="#insertModal" data-repeater-create type="button"><i class="bx bx-plus"></i>Qo'shish</button></li>
-                            @*<li class="ml-2"><button class="btn btn-primary" data-toggle="modal" data-target="#full-scrn" data-repeater-create type="button"><i class="bx bx-edit"></i> O'zgartirish</button></li>
-                                <li class="ml-2"><button class="btn btn-danger" data-toggle="modal" data-target="#full-scrn" data-repeater-delete type="button"> <i class="bx bx-x"></i>O'chirish</button></li>*@
+                            <li class="ml-2"><button class="btn btn-primary" data-toggle="modal" data-target="#full-scrn" data-repeater-create type="button"><i class="bx bx-plus"></i>Qo'shish</button></li>
                         </ul>
                         <hr />
                         <div class="card">
@@ -77,18 +75,18 @@
                                         {
                                             <tr id="row_@part.ID">
                                                 <td class="text-bold-600">@part.Code </td>
-                                                <td>@part.Photo</td>
+                                                <td>@Model.Photo</td>
                                                 <td>@part.Name </td>
                                                 <td>@part.NameRus </td>
                                                 <td>@part.Description </td>
                                                 <td>@part.DescriptionRus </td>
                                                 <td class="text-bold-500">@part.PartNumber </td>
                                                 <td>@part.OEMPartNumber </td>
-                                                <td>@part.Model </td>
+                                                <td>@part.Modeli </td>
                                                 <td>@part.Type </td>
                                                 <td>@part.SerialNumber </td>
                                                 <td>@part.Manufactured_Date </td>
-                                                <td>@part.NamePlate </td>
+                                                <td>@Model.NamePlate </td>
                                                 <td>@part.TechData </td>
                                                 <td>@part.Unit </td>
                                                 <td>@part.Price </td>
@@ -115,19 +113,18 @@
                             </div>
                             <input type="hidden" id="hiddenID" />
                             <!-- datatable ends -->
-                            <!-- modals start -->
-                            <!--Insert -->
-                            <div class="modal fade text-left modal-borderless" id="insertModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel20" aria-hidden="true">
+                            <!-- MODALS -->
+                            <div class="modal fade text-left modal-borderless" id="full-scrn" tabindex="-1" role="dialog" aria-labelledby="myModalLabel20" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-scrollable" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h4 class="modal-title" id="myModalLabel33">Material qo'shish </h4>
+                                            <h4 class="modal-title" id="myModalLabel33">Uskuna qo'shish </h4>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <i class="bx bx-x"></i>
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <form id="insertModalForm">
+                                            <form id="modalForm">
                                                 <label>Kod: </label>
                                                 @Html.TextBoxFor(model => model.Code, new { @class = "form-control", @placeholder = "Kod" })
                                                 <label>Nomi(ENG): </label>
@@ -145,7 +142,7 @@
                                                 <label>OEM PartNumber: </label>
                                                 @Html.TextBoxFor(model => model.OEMPartNumber, new { @class = "form-control", @placeholder = "OEM PartNumber" })
                                                 <label>Model: </label>
-                                                @Html.TextBoxFor(model => model.Model, new { @class = "form-control", @placeholder = "Model" })
+                                                @Html.TextBoxFor(model => model.Modeli, new { @class = "form-control", @placeholder = "Model" })
                                                 <label>Tip: </label>
                                                 @Html.TextBoxFor(model => model.Type, new { @class = "form-control", @placeholder = "Tip" })
                                                 <label>Texnik tafsilot: </label>
@@ -181,7 +178,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <!--Delete -->
                             <div class="modal fade text-left" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel120" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
                                     <div class="modal-content">
@@ -208,61 +204,55 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- modals end -->
                         </div>
                     </section>
                 </div>
             </div>
         </div>
-    }
-    <script src="~/Scripts/Fresta/app-assets/js/core/libraries/jquery.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            
-            $("#btnSubmit").click(function () {
-                var formData = $("#insertModalForm").serialize();
+        <script src="~/Scripts/Fresta/app-assets/js/core/libraries/jquery.min.js"></script>
+        <script>
+            $(document).ready(function () {
+
+                $("#btnSubmit").click(function () {
+                    var formData = $("#modalForm").serialize();
+                    $.ajax({
+                        type: "POST",
+                        url: "/Database/PartsInsert",
+                        data: formData,
+                        success: function () {
+                            $("#full-scrn").modal("hide");
+                        }
+                    })
+
+
+                })
+                $("#btnCancel").click(function () {
+                    $("#full-scrn").modal("hide");
+                })
+            })
+            var ConfirmDelete = function (PartID) {
+                $("#hiddenID").val(PartID);
+                $("#deleteModal").modal("show");
+            }
+
+            var Delete = function () {
+                var pID = $("#hiddenID").val();
 
                 $.ajax({
                     type: "POST",
-                    url: "/Database/Parts",
-                    data: formData,
+                    url: "/Database/PartsDelete",
+                    data: { PartID: pID },
                     success: function () {
-                        $("#insertModal").modal("hide");
+                        $("#deleteModal").modal("hide");
+                        $("#row_" + pID).remove();
                     }
                 })
+            }
 
-
-            })
-            $("#btnCancel").click(function () {
-                $("#insertModal").modal("hide");
-            })
-        })
-
-        var ConfirmDelete = function (PartID) {
-            $("#hiddenID").val(PartID);
-            $("#deleteModal").modal("show");
-        }
-
-        var Delete = function () {
-            var pID = $("#hiddenID").val();
-
-            $.ajax({
-                type: "POST",
-                url: "/Database/PartsDelete",
-                data: { PartID: pID },
-                success: function () {
-                    $("#deleteModal").modal("hide");
-                    $("#row_" + pID).remove();
-                }
-            })
-        }
-
-        var Edit = function (PartID) {
-            $("#hiddenID").val(PartID);
-        }
-
-    </script>
-
+            var Edit = function (PartID) {
+                $("#hiddenID").val(PartID);
+            }
+        </script>
+    }
 </body>
 </html>
