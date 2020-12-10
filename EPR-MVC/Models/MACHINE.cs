@@ -11,7 +11,7 @@ namespace EPR_MVC.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class MACHINE
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,19 +21,19 @@ namespace EPR_MVC.Models
             this.WH_INS = new HashSet<WH_INS>();
             this.WH_OUTS = new HashSet<WH_OUTS>();
         }
-    
+
         public string Name { get; set; }
         public string Description { get; set; }
         public int UzAutoSupplierID { get; set; }
         public int ManufacturerID { get; set; }
         public string Lifespan { get; set; }
-        public Nullable<bool> IsActive { get; set; }
+        public bool IsActive { get; set; }
         public Nullable<System.DateTime> InstalledDate { get; set; }
         public int TypeID { get; set; }
         public int ID { get; set; }
         public string PartNumber { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
-    
+
         public virtual MACHINETYPE MACHINETYPE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PART> PARTS { get; set; }

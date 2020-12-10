@@ -1,0 +1,80 @@
+﻿@model EPR_MVC.Models.PartsViewModel
+<head>
+    <meta charset="utf-8">
+</head>
+
+<div>
+    <form id="modal2Form">
+        @Html.HiddenFor(model => model.ID)
+        <label>Kod: </label>
+        @Html.TextBoxFor(model => model.Code, new { @class = "form-control", @placeholder = "Kod" })
+        <label>Nomi(ENG): </label>
+        @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @placeholder = "Name" })
+        <label>Nomi(RUS): </label>
+        @Html.TextBoxFor(model => model.NameRus, new { @class = "form-control", @placeholder = "Наименование" })
+        <label>Batafsil(ENG): </label>
+        @Html.TextBoxFor(model => model.Description, new { @class = "form-control", @placeholder = "Detailed information" })
+        <label>Batafsil(RUS): </label>
+        @Html.TextBoxFor(model => model.DescriptionRus, new { @class = "form-control", @placeholder = "Подробно" })
+        <label>PartNumber: </label>
+        @Html.TextBoxFor(model => model.PartNumber, new { @class = "form-control", @placeholder = "PartNumber" })
+        <label>Serial Number: </label>
+        @Html.TextBoxFor(model => model.SerialNumber, new { @class = "form-control", @placeholder = "SerialNumber" })
+        <label>OEM PartNumber: </label>
+        @Html.TextBoxFor(model => model.OEMPartNumber, new { @class = "form-control", @placeholder = "OEM PartNumber" })
+        <label>Model: </label>
+        @Html.TextBoxFor(model => model.Modeli, new { @class = "form-control", @placeholder = "Model" })
+        <label>Tip: </label>
+        @Html.TextBoxFor(model => model.Type, new { @class = "form-control", @placeholder = "Tip" })
+        <label>Texnik tafsilot: </label>
+        @Html.TextBoxFor(model => model.TechData, new { @class = "form-control", @placeholder = "Techdata" })
+        <label>Ishlab chiqarilgan sana: </label>
+        @Html.TextBoxFor(model => model.Manufactured_Date, new { @class = "form-control", @placeholder = "BirthDate" })
+        <label>O'lchov birligi: </label>
+        @Html.TextBoxFor(model => model.Unit, new { @class = "form-control", @placeholder = "O'lchov" })
+        <label>Narxi: </label>
+        @Html.TextBoxFor(model => model.Price, new { @class = "form-control", @placeholder = "Narx" })
+        <label>Valyuta: </label>
+        @Html.TextBoxFor(model => model.Currency, new { @class = "form-control", @placeholder = "Valyuta" })
+        <label>Yetkazib beruvchi: </label>
+        @Html.DropDownListFor(model => model.SupplierID, ViewBag.SupplierList as SelectList, "---tanlang---", new { @class = "form-control", @placeholder = "Yetkazib beruvchi" })
+        <label>Ishlab chiqaruvchi: </label>
+        @Html.DropDownListFor(model => model.ManufacturerID, ViewBag.ManufacturerList as SelectList, "---tanlang---", new { @class = "form-control", @placeholder = "Ishlab chiqaruvchi" })
+        <label>OEM: </label>
+        @Html.DropDownListFor(model => model.OEMID, ViewBag.OEMList as SelectList, "---tanlang---", new { @class = "form-control", @placeholder = "OEM" })
+        <label>Qaysi uskunaga: </label>
+        @Html.DropDownListFor(model => model.MachineID, ViewBag.MachineList as SelectList, "---tanlang---", new { @class = "form-control", @placeholder = "Uskuna" })
+        <label>UzAuto Korxonasi: </label>
+        @Html.DropDownListFor(model => model.UzAutoSupplierID, ViewBag.UzAutoSupplierList as SelectList, "---tanlang---", new { @class = "form-control", @placeholder = "Mahalliy korxona" })
+    </form>
+</div>
+<a href="#" class="btn btn-light-secondary" data-dismiss="modal" id="btnCancel">
+    <i class="bx bx-x d-block d-sm-none"></i>
+    <span class="d-none d-sm-block">Chiqish</span>
+</a>
+<a href="#" class="btn btn-primary ml-1" id="btnSubmit" data-dismiss="modal">
+    <i class="bx bx-x d-block d-sm-none"></i>
+    <span class="d-none d-sm-block">Save</span>
+</a>
+<script>
+    $(document).ready(function () {
+        $("#btnSubmit").click(function () {
+            var formData = $("#modal2Form").serialize();
+            $.ajax({
+                type: "POST",
+                url: "/Database/PartsSave",
+                contentType: 'application/json',
+                data: { model: formData },
+                success: function () {
+                    $("#full-scrn").modal("hide");
+                    window.location.href = "/Database/Parts";
+                }
+            })
+
+
+        })
+        $("#btnCancel").click(function () {
+            $("#full-scrn").modal("hide");
+        })
+    })
+</script>
