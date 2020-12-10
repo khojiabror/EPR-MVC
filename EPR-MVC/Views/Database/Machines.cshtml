@@ -1,7 +1,7 @@
 ﻿@model EPR_MVC.Models.MachinesViewModel
 <html>
 <head>
-
+    <meta charset="UTF-8">
 </head>
 <body class="vertical-layout vertical-menu-modern 2-columns  navbar-sticky footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
 
@@ -36,7 +36,7 @@
                     </div>
                     <section id="table-success">
                         <ul class="list-inline mb-0">
-                            <li class="ml-2"><button class="btn btn-primary" data-toggle="modal" data-target="#full-scrn" data-repeater-create type="button"><i class="bx bx-plus"></i>Qo'shish</button></li>
+                            <li class="ml-2"><button class="btn btn-primary" onclick="Edit(0)"><i class="bx bx-plus"></i>Qo'shish</button></li>
                             @*<li class="ml-2"><button class="btn btn-primary" data-toggle="modal" data-target="#full-scrn" data-repeater-create type="button"><i class="bx bx-edit"></i> O'zgartirish</button></li>
                                 <li class="ml-2"><button class="btn btn-danger" data-toggle="modal" data-target="#full-scrn" data-repeater-delete type="button"> <i class="bx bx-x"></i>O'chirish</button></li>*@
                         </ul>
@@ -47,6 +47,7 @@
                                 <table id="table-extended-success" class="table mb-0">
                                     <thead class="thead-dark">
                                         <tr>
+                                            <th>Amal</th>
                                             <th>Nomi</th>
                                             <th>Batafsil</th>
                                             <th>Partnumber</th>
@@ -56,13 +57,21 @@
                                             <th>Status</th>
                                             <th>Ishlab chiqaruvchi</th>
                                             <th>UzAuto korxonasi</th>
-                                            <th>Amal</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach (var machine in Model.machineList)
                                         {
                                             <tr id="row_@machine.ID">
+                                                <td>
+                                                    <div class="dropdown">
+                                                        <span class="bx bx-dots-vertical-rounded font-medium-3 dropdown-toggle nav-hide-arrow cursor-pointer" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="menu"></span>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#" onclick="Edit(@machine.ID)"><i class="bx bx-edit-alt mr-1"></i> o'zgartirish</a>
+                                                            <a class="dropdown-item" href="#" onclick="ConfirmDelete(@machine.ID)"><i class="bx bx-trash mr-1"></i> o'chirish</a>
+                                                        </div>
+                                                    </div>
+                                                </td>
                                                 <td>@machine.Name </td>
                                                 <td>@machine.Description </td>
                                                 <td>@machine.PartNumber </td>
@@ -79,15 +88,6 @@
                                                 }
                                                 <td>@machine.MANUFACTURER.Name</td>
                                                 <td>@machine.UZAUTOSUPPLIER.Name </td>
-                                                <td>
-                                                    <div class="dropdown">
-                                                        <span class="bx bx-dots-vertical-rounded font-medium-3 dropdown-toggle nav-hide-arrow cursor-pointer" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="menu"></span>
-                                                        <div class="dropdown-menu dropdown-menu-right">
-                                                            <a class="dropdown-item" href="#" onclick="Edit(@machine.ID)"><i class="bx bx-edit-alt mr-1"></i> o'zgartirish</a>
-                                                            <a class="dropdown-item" href="#" onclick="ConfirmDelete(@machine.ID)"><i class="bx bx-trash mr-1"></i> o'chirish</a>
-                                                        </div>
-                                                    </div>
-                                                </td>
                                             </tr>
                                         }
                                         <tr></tr>
@@ -106,36 +106,36 @@
                                                 <i class="bx bx-x"></i>
                                             </button>
                                         </div>
-                                        <div class="modal-body">
-                                            <form id="modalForm">
-                                                <label>Nomi: </label>
-                                                @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @placeholder = "Nomi" })
-                                                <label>Batafsil: </label>
-                                                @Html.TextBoxFor(model => model.Description, new { @class = "form-control", @placeholder = "Batafsil" })
-                                                <label>PartNumber: </label>
-                                                @Html.TextBoxFor(model => model.PartNumber, new { @class = "form-control", @placeholder = "PartNumber" })
-                                                <label>Yaroqlilik muddati: </label>
-                                                @Html.TextBoxFor(model => model.Lifespan, new { @class = "form-control", @placeholder = "Yaroqlilik muddati" })
-                                                <label>Ishga tushgan sana: </label>
-                                                @Html.TextBoxFor(model => model.InstalledDate, new { @class = "form-control", @placeholder = "Ishga tushgan sana" })
-                                                <label>Turi: </label>
-                                                @Html.DropDownListFor(model => model.TypeID, ViewBag.TypeList as SelectList, "---tanlang---", new { @class = "form-control", @placeholder = "Turi" })
-                                                <label>Oxirgi status: </label>
-                                                @Html.CheckBoxFor(model => model.Status, new { @class = "form-control", @placeholder = "PartNumber" })
-                                                <label>Ishlab chiqaruvchi: </label>
-                                                @Html.DropDownListFor(model => model.ManufacturerID, ViewBag.ManufacturerList as SelectList, "---tanlang---", new { @class = "form-control", @placeholder = "Ishlab chiqaruvchi" })
-                                                <label>UzAuto Korxonasi: </label>
-                                                @Html.DropDownListFor(model => model.UzAutoSupplierID, ViewBag.UzAutoSupplierList as SelectList, "---tanlang---", new { @class = "form-control", @placeholder = "Mahalliy korxona" })
-                                            </form>
+                                        <div class="modal-body" id="modalForm">
+                                            @*<form id="modalForm">
+                                                    <label>Nomi: </label>
+                                                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @placeholder = "Nomi" })
+                                                    <label>Batafsil: </label>
+                                                    @Html.TextBoxFor(model => model.Description, new { @class = "form-control", @placeholder = "Batafsil" })
+                                                    <label>PartNumber: </label>
+                                                    @Html.TextBoxFor(model => model.PartNumber, new { @class = "form-control", @placeholder = "PartNumber" })
+                                                    <label>Yaroqlilik muddati: </label>
+                                                    @Html.TextBoxFor(model => model.Lifespan, new { @class = "form-control", @placeholder = "Yaroqlilik muddati" })
+                                                    <label>Ishga tushgan sana: </label>
+                                                    @Html.TextBoxFor(model => model.InstalledDate, new { @class = "form-control", @placeholder = "Ishga tushgan sana" })
+                                                    <label>Turi: </label>
+                                                    @Html.DropDownListFor(model => model.TypeID, ViewBag.TypeList as SelectList, "---tanlang---", new { @class = "form-control", @placeholder = "Turi" })
+                                                    <label>Oxirgi status: </label>
+                                                    @Html.CheckBoxFor(model => model.Status, new { @class = "form-control", @placeholder = "PartNumber" })
+                                                    <label>Ishlab chiqaruvchi: </label>
+                                                    @Html.DropDownListFor(model => model.ManufacturerID, ViewBag.ManufacturerList as SelectList, "---tanlang---", new { @class = "form-control", @placeholder = "Ishlab chiqaruvchi" })
+                                                    <label>UzAuto Korxonasi: </label>
+                                                    @Html.DropDownListFor(model => model.UzAutoSupplierID, ViewBag.UzAutoSupplierList as SelectList, "---tanlang---", new { @class = "form-control", @placeholder = "Mahalliy korxona" })
+                                                </form>*@
                                         </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-light-secondary" data-dismiss="modal" id="btnCancel">
-                                                <i class="bx bx-x d-block d-sm-none"></i>
-                                                <span class="d-none d-sm-block">Chiqish</span>
-                                            </button>
-                                            <input type="reset" class="btn btn-primary ml-1" data-dismiss="modal" id="btnSubmit" value="Qo'shish" />
-                                            <i class="bx bx-check d-block d-sm-none"></i>
-                                        </div>
+                                        @*<div class="modal-footer">
+                                                <button type="button" class="btn btn-light-secondary" data-dismiss="modal" id="btnCancel">
+                                                    <i class="bx bx-x d-block d-sm-none"></i>
+                                                    <span class="d-none d-sm-block">Chiqish</span>
+                                                </button>
+                                                <input type="reset" class="btn btn-primary ml-1" data-dismiss="modal" id="btnSubmit" value="Qo'shish" />
+                                                <i class="bx bx-check d-block d-sm-none"></i>
+                                            </div>*@
                                     </div>
                                 </div>
                             </div>
@@ -170,49 +170,31 @@
                 </div>
             </div>
         </div>
-        <script src="~/Scripts/Fresta/app-assets/js/core/libraries/jquery.min.js"></script>
         <script>
-            $(document).ready(function () {
-
-                $("#btnSubmit").click(function () {
-                    var formData = $("#modalForm").serialize();
-                    $.ajax({
-                        type: "POST",
-                        url: "/Database/MachinesInsert",
-                        data: formData,
-                        success: function () {
-                            $("#full-scrn").modal("hide");
-                        }
-                    })
-
-
-                })
-                $("#btnCancel").click(function () {
-                    $("#full-scrn").modal("hide");
-                })
-            })
-            var ConfirmDelete = function (PartID) {
-                $("#hiddenID").val(PartID);
+            var ConfirmDelete = function (machineID) {
+                $("#hiddenID").val(machineID);
                 $("#deleteModal").modal("show");
             }
-
             var Delete = function () {
                 var mID = $("#hiddenID").val();
 
                 $.ajax({
                     type: "POST",
                     url: "/Database/MachinesDelete",
-                    data: { MachineID: mID },
+                    data: { machineID: mID },
                     success: function () {
                         $("#deleteModal").modal("hide");
                         $("#row_" + mID).remove();
                     }
                 })
             }
-
-            var Edit = function (PartID) {
-                $("#hiddenID").val(PartID);
+            var Edit = function (machineID) {
+                var url = "/Database/MachinesInsertOrEdit?machineID=" + machineID;
+                $("#modalForm").load(url, function () {
+                    $("#full-scrn").modal("show")
+                })
             }
+
         </script>
     }
 </body>

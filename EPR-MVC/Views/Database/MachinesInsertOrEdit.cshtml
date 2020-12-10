@@ -1,0 +1,50 @@
+﻿@model EPR_MVC.Models.MachinesViewModel
+<div>
+    <form id="modalForm">
+        @Html.HiddenFor(model => model.ID);
+        <label>Nomi: </label>
+        @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @placeholder = "Nomi" })
+        <label>Batafsil: </label>
+        @Html.TextBoxFor(model => model.Description, new { @class = "form-control", @placeholder = "Batafsil" })
+        <label>PartNumber: </label>
+        @Html.TextBoxFor(model => model.PartNumber, new { @class = "form-control", @placeholder = "PartNumber" })
+        <label>Yaroqlilik muddati: </label>
+        @Html.TextBoxFor(model => model.Lifespan, new { @class = "form-control", @placeholder = "Yaroqlilik muddati" })
+        <label>Ishga tushgan sana: </label>
+        @Html.TextBoxFor(model => model.InstalledDate, new { @class = "form-control", @placeholder = "Ishga tushgan sana" })
+        <label>Turi: </label>
+        @Html.DropDownListFor(model => model.TypeID, ViewBag.TypeList as SelectList, "---tanlang---", new { @class = "form-control", @placeholder = "Turi" })
+        <label>Oxirgi status: </label>
+        @Html.CheckBoxFor(model => model.Status, new { @class = "form-control", @placeholder = "PartNumber" })
+        <label>Ishlab chiqaruvchi: </label>
+        @Html.DropDownListFor(model => model.ManufacturerID, ViewBag.ManufacturerList as SelectList, "---tanlang---", new { @class = "form-control", @placeholder = "Ishlab chiqaruvchi" })
+        <label>UzAuto Korxonasi: </label>
+        @Html.DropDownListFor(model => model.UzAutoSupplierID, ViewBag.UzAutoSupplierList as SelectList, "---tanlang---", new { @class = "form-control", @placeholder = "Mahalliy korxona" })
+    </form>
+    <button type="button" class="btn btn-light-secondary" data-dismiss="modal" id="btnCancel">
+        <i class="bx bx-x d-block d-sm-none"></i>
+        <span class="d-none d-sm-block">Chiqish</span>
+    </button>
+    <input type="reset" class="btn btn-primary ml-1" data-dismiss="modal" id="btnSubmit" value="Qo'shish" />
+    <i class="bx bx-check d-block d-sm-none"></i>
+    <script>
+        $(document).ready(function () {
+
+            $("#btnSubmit").click(function () {
+                var formData = $("#modalForm").serialize();
+                $.ajax({
+                    type: "POST",
+                    url: "/Database/MachinesSave",
+                    data: formData,
+                    success: function () {
+                        $("#full-scrn").modal("hide");
+                        window.location.href = "/Database/Machines";
+                    }
+                })
+            })
+            $("#btnCancel").click(function () {
+                $("#full-scrn").modal("hide");
+            })
+        })
+    </script>
+</div>

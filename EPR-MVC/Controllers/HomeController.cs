@@ -13,18 +13,5 @@ namespace EPR_MVC.Controllers
         {
             return View();
         }
-
-        public ActionResult Auth()
-        {
-            //using (DBEPREntities db = new DBEPREntities())
-            //{
-            //    USER user = db.USERS.SingleOrDefault(u => u.Name);
-
-            //    PartsViewModel pvm = new PartsViewModel();
-
-            //    return View();
-            //}   
-            return View();
-        }
     }
 }

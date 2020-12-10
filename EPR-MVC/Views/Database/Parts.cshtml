@@ -1,7 +1,7 @@
 ﻿@model EPR_MVC.Models.PartsViewModel
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
 </head>
 <body class="vertical-layout vertical-menu-modern 2-columns  navbar-sticky footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
 
@@ -22,7 +22,7 @@
                                             <a href="Index"><i class="bx bx-home-alt"></i></a>
                                         </li>
                                         <li class="breadcrumb-item active">
-                                            Buyumlar
+                                            Uskunalar
                                         </li>
                                     </ol>
                                 </div>
@@ -34,9 +34,10 @@
                     <div class="row">
 
                     </div>
+                    <script src="~/Scripts/Fresta/app-assets/js/core/libraries/jquery.min.js"></script>
                     <section id="table-success">
                         <ul class="list-inline mb-0">
-                            <li class="ml-2"><button class="btn btn-primary" data-toggle="modal" data-target="#full-scrn" data-repeater-create type="button"><i class="bx bx-plus"></i>Qo'shish</button></li>
+                            <li class="ml-2"><button class="btn btn-primary" onclick="Edit(0)"><i class="bx bx-plus"></i>Qo'shish</button></li>
                         </ul>
                         <hr />
                         <div class="card">
@@ -45,6 +46,7 @@
                                 <table id="table-extended-success" class="table mb-0">
                                     <thead class="thead-dark">
                                         <tr>
+                                            <th>Amal</th>
                                             <th>Kod</th>
                                             <th>Rasmi</th>
                                             <th>Nomi(ENG)</th>
@@ -67,13 +69,21 @@
                                             <th>OEM</th>
                                             <th>Ishlab chiqaruvchi</th>
                                             <th>UzAuto korxonasi</th>
-                                            <th>Amal</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach (var part in Model.PartList)
                                         {
                                             <tr id="row_@part.ID">
+                                                <td>
+                                                    <div class="dropdown">
+                                                        <span class="bx bx-dots-vertical-rounded font-medium-3 dropdown-toggle nav-hide-arrow cursor-pointer" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="menu"></span>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#" onclick="Edit(@part.ID)"><i class="bx bx-edit-alt mr-1"></i> o'zgartirish</a>
+                                                            <a class="dropdown-item" href="#" onclick="ConfirmDelete(@part.ID)"><i class="bx bx-trash mr-1"></i> o'chirish</a>
+                                                        </div>
+                                                    </div>
+                                                </td>
                                                 <td class="text-bold-600">@part.Code </td>
                                                 <td>@Model.Photo</td>
                                                 <td>@part.Name </td>
@@ -96,15 +106,6 @@
                                                 <td class="text-success">@part.OEM.Name </td>
                                                 <td>@part.MANUFACTURER.Name </td>
                                                 <td>@part.UZAUTOSUPPLIER.Name </td>
-                                                <td>
-                                                    <div class="dropdown">
-                                                        <span class="bx bx-dots-vertical-rounded font-medium-3 dropdown-toggle nav-hide-arrow cursor-pointer" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="menu"></span>
-                                                        <div class="dropdown-menu dropdown-menu-right">
-                                                            <a class="dropdown-item" onclick="Edit(@part.ID)"><i class="bx bx-edit-alt mr-1"></i> o'zgartirish</a>
-                                                            <a class="dropdown-item" href="#" onclick="ConfirmDelete(@part.ID)"><i class="bx bx-trash mr-1"></i> o'chirish</a>
-                                                        </div>
-                                                    </div>
-                                                </td>
                                             </tr>
                                         }
                                         <tr></tr>
@@ -123,58 +124,59 @@
                                                 <i class="bx bx-x"></i>
                                             </button>
                                         </div>
-                                        <div class="modal-body">
-                                            <form id="modalForm">
-                                                <label>Kod: </label>
-                                                @Html.TextBoxFor(model => model.Code, new { @class = "form-control", @placeholder = "Kod" })
-                                                <label>Nomi(ENG): </label>
-                                                @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @placeholder = "Name" })
-                                                <label>Nomi(RUS): </label>
-                                                @Html.TextBoxFor(model => model.NameRus, new { @class = "form-control", @placeholder = "Наименование" })
-                                                <label>Batafsil(ENG): </label>
-                                                @Html.TextBoxFor(model => model.Description, new { @class = "form-control", @placeholder = "Detailed information" })
-                                                <label>Batafsil(RUS): </label>
-                                                @Html.TextBoxFor(model => model.DescriptionRus, new { @class = "form-control", @placeholder = "Подробно" })
-                                                <label>PartNumber: </label>
-                                                @Html.TextBoxFor(model => model.PartNumber, new { @class = "form-control", @placeholder = "PartNumber" })
-                                                <label>Serial Number: </label>
-                                                @Html.TextBoxFor(model => model.SerialNumber, new { @class = "form-control", @placeholder = "SerialNumber" })
-                                                <label>OEM PartNumber: </label>
-                                                @Html.TextBoxFor(model => model.OEMPartNumber, new { @class = "form-control", @placeholder = "OEM PartNumber" })
-                                                <label>Model: </label>
-                                                @Html.TextBoxFor(model => model.Modeli, new { @class = "form-control", @placeholder = "Model" })
-                                                <label>Tip: </label>
-                                                @Html.TextBoxFor(model => model.Type, new { @class = "form-control", @placeholder = "Tip" })
-                                                <label>Texnik tafsilot: </label>
-                                                @Html.TextBoxFor(model => model.TechData, new { @class = "form-control", @placeholder = "Techdata" })
-                                                <label>Ishlab chiqarilgan sana: </label>
-                                                @Html.TextBoxFor(model => model.Manufactured_Date, new { @class = "form-control", @placeholder = "BirthDate" })
-                                                <label>O'lchov birligi: </label>
-                                                @Html.TextBoxFor(model => model.Unit, new { @class = "form-control", @placeholder = "O'lchov" })
-                                                <label>Narxi: </label>
-                                                @Html.TextBoxFor(model => model.Price, new { @class = "form-control", @placeholder = "Narx" })
-                                                <label>Valyuta: </label>
-                                                @Html.TextBoxFor(model => model.Currency, new { @class = "form-control", @placeholder = "Valyuta" })
-                                                <label>Yetkazib beruvchi: </label>
-                                                @Html.DropDownListFor(model => model.SupplierID, ViewBag.SupplierList as SelectList, "---tanlang---", new { @class = "form-control", @placeholder = "Yetkazib beruvchi" })
-                                                <label>Ishlab chiqaruvchi: </label>
-                                                @Html.DropDownListFor(model => model.ManufacturerID, ViewBag.ManufacturerList as SelectList, "---tanlang---", new { @class = "form-control", @placeholder = "Ishlab chiqaruvchi" })
-                                                <label>OEM: </label>
-                                                @Html.DropDownListFor(model => model.OEMID, ViewBag.OEMList as SelectList, "---tanlang---", new { @class = "form-control", @placeholder = "OEM" })
-                                                <label>Qaysi uskunaga: </label>
-                                                @Html.DropDownListFor(model => model.MachineID, ViewBag.MachineList as SelectList, "---tanlang---", new { @class = "form-control", @placeholder = "Uskuna" })
-                                                <label>UzAuto Korxonasi: </label>
-                                                @Html.DropDownListFor(model => model.UzAutoSupplierID, ViewBag.UzAutoSupplierList as SelectList, "---tanlang---", new { @class = "form-control", @placeholder = "Mahalliy korxona" })
-                                            </form>
+                                        <div class="modal-body" id="modalForm">
+                                            @*<form id="modalForm">
+                                                    @Html.HiddenFor(model => model.ID)
+                                                    <label>Kod: </label>
+                                                    @Html.TextBoxFor(model => model.Code, new { @class = "form-control", @placeholder = "Kod" })
+                                                    <label>Nomi(ENG): </label>
+                                                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @placeholder = "Name" })
+                                                    <label>Nomi(RUS): </label>
+                                                    @Html.TextBoxFor(model => model.NameRus, new { @class = "form-control", @placeholder = "Наименование" })
+                                                    <label>Batafsil(ENG): </label>
+                                                    @Html.TextBoxFor(model => model.Description, new { @class = "form-control", @placeholder = "Detailed information" })
+                                                    <label>Batafsil(RUS): </label>
+                                                    @Html.TextBoxFor(model => model.DescriptionRus, new { @class = "form-control", @placeholder = "Подробно" })
+                                                    <label>PartNumber: </label>
+                                                    @Html.TextBoxFor(model => model.PartNumber, new { @class = "form-control", @placeholder = "PartNumber" })
+                                                    <label>Serial Number: </label>
+                                                    @Html.TextBoxFor(model => model.SerialNumber, new { @class = "form-control", @placeholder = "SerialNumber" })
+                                                    <label>OEM PartNumber: </label>
+                                                    @Html.TextBoxFor(model => model.OEMPartNumber, new { @class = "form-control", @placeholder = "OEM PartNumber" })
+                                                    <label>Model: </label>
+                                                    @Html.TextBoxFor(model => model.Modeli, new { @class = "form-control", @placeholder = "Model" })
+                                                    <label>Tip: </label>
+                                                    @Html.TextBoxFor(model => model.Type, new { @class = "form-control", @placeholder = "Tip" })
+                                                    <label>Texnik tafsilot: </label>
+                                                    @Html.TextBoxFor(model => model.TechData, new { @class = "form-control", @placeholder = "Techdata" })
+                                                    <label>Ishlab chiqarilgan sana: </label>
+                                                    @Html.TextBoxFor(model => model.Manufactured_Date, new { @class = "form-control", @placeholder = "BirthDate" })
+                                                    <label>O'lchov birligi: </label>
+                                                    @Html.TextBoxFor(model => model.Unit, new { @class = "form-control", @placeholder = "O'lchov" })
+                                                    <label>Narxi: </label>
+                                                    @Html.TextBoxFor(model => model.Price, new { @class = "form-control", @placeholder = "Narx" })
+                                                    <label>Valyuta: </label>
+                                                    @Html.TextBoxFor(model => model.Currency, new { @class = "form-control", @placeholder = "Valyuta" })
+                                                    <label>Yetkazib beruvchi: </label>
+                                                    @Html.DropDownListFor(model => model.SupplierID, ViewBag.SupplierList as SelectList, "---tanlang---", new { @class = "form-control", @placeholder = "Yetkazib beruvchi" })
+                                                    <label>Ishlab chiqaruvchi: </label>
+                                                    @Html.DropDownListFor(model => model.ManufacturerID, ViewBag.ManufacturerList as SelectList, "---tanlang---", new { @class = "form-control", @placeholder = "Ishlab chiqaruvchi" })
+                                                    <label>OEM: </label>
+                                                    @Html.DropDownListFor(model => model.OEMID, ViewBag.OEMList as SelectList, "---tanlang---", new { @class = "form-control", @placeholder = "OEM" })
+                                                    <label>Qaysi uskunaga: </label>
+                                                    @Html.DropDownListFor(model => model.MachineID, ViewBag.MachineList as SelectList, "---tanlang---", new { @class = "form-control", @placeholder = "Uskuna" })
+                                                    <label>UzAuto Korxonasi: </label>
+                                                    @Html.DropDownListFor(model => model.UzAutoSupplierID, ViewBag.UzAutoSupplierList as SelectList, "---tanlang---", new { @class = "form-control", @placeholder = "Mahalliy korxona" })
+                                                </form>*@
                                         </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-light-secondary" data-dismiss="modal" id="btnCancel">
-                                                <i class="bx bx-x d-block d-sm-none"></i>
-                                                <span class="d-none d-sm-block">Chiqish</span>
-                                            </button>
-                                            <input type="reset" class="btn btn-primary ml-1" data-dismiss="modal" id="btnSubmit" value="Qo'shish" />
-                                            <i class="bx bx-check d-block d-sm-none"></i>
-                                        </div>
+                                        @*<div class="modal-footer">
+                                                <button type="button" class="btn btn-light-secondary" data-dismiss="modal" id="btnCancel">
+                                                    <i class="bx bx-x d-block d-sm-none"></i>
+                                                    <span class="d-none d-sm-block">Chiqish</span>
+                                                </button>
+                                                <input type="reset" class="btn btn-primary ml-1" data-dismiss="modal" id="btnSubmit" value="Qo'shish" />
+                                                <i class="bx bx-check d-block d-sm-none"></i>
+                                            </div>*@
                                     </div>
                                 </div>
                             </div>
@@ -209,29 +211,9 @@
                 </div>
             </div>
         </div>
-        <script src="~/Scripts/Fresta/app-assets/js/core/libraries/jquery.min.js"></script>
         <script>
-            $(document).ready(function () {
-
-                $("#btnSubmit").click(function () {
-                    var formData = $("#modalForm").serialize();
-                    $.ajax({
-                        type: "POST",
-                        url: "/Database/PartsInsert",
-                        data: formData,
-                        success: function () {
-                            $("#full-scrn").modal("hide");
-                        }
-                    })
-
-
-                })
-                $("#btnCancel").click(function () {
-                    $("#full-scrn").modal("hide");
-                })
-            })
-            var ConfirmDelete = function (PartID) {
-                $("#hiddenID").val(PartID);
+            var ConfirmDelete = function (partID) {
+                $("#hiddenID").val(partID);
                 $("#deleteModal").modal("show");
             }
 
@@ -241,7 +223,7 @@
                 $.ajax({
                     type: "POST",
                     url: "/Database/PartsDelete",
-                    data: { PartID: pID },
+                    data: { partID: pID },
                     success: function () {
                         $("#deleteModal").modal("hide");
                         $("#row_" + pID).remove();
@@ -249,8 +231,11 @@
                 })
             }
 
-            var Edit = function (PartID) {
-                $("#hiddenID").val(PartID);
+            var Edit = function (partID) {
+                var url = "/Database/PartsInsertOrEdit?partID=" + partID;
+                $("#modalForm").load(url, function () {
+                    $("#full-scrn").modal("show")
+                })
             }
         </script>
     }
