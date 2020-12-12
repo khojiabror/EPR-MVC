@@ -16,6 +16,9 @@
     <link rel="stylesheet" type="text/css" href="~/Content/Fresta/app-assets/vendors/css/extensions/swiper.min.css">
     <link rel="stylesheet" type="text/css" href="~/Content/Fresta/app-assets/vendors/css/tables/datatable/datatables.min.css">
     <link rel="stylesheet" type="text/css" href="~/Content/Fresta/app-assets/vendors/css/pickers/daterange/daterangepicker.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/Fresta/app-assets/css/plugins/forms/validation/form-validation.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/Fresta/app-assets/vendors/css/forms/select/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/Fresta/app-assets/vendors/css/pickers/pickadate/pickadate.css">
     <!-- END: Vendor CSS-->
     <!-- BEGIN: Livicons-->
     <!-- END: Livicons-->
@@ -30,7 +33,7 @@
     <!-- BEGIN: Page CSS-->
     <link rel="stylesheet" type="text/css" href="~/Content/Fresta/app-assets/css/core/menu/menu-types/vertical-menu.css">
     <link rel="stylesheet" type="text/css" href="~/Content/Fresta/app-assets/css/pages/dashboard-ecommerce.css">
-
+    <link rel="stylesheet" type="text/css" href="~/Content/Fresta/app-assets/css/pages/page-users.css">
     <!-- END: Page CSS-->
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="~/Content/Fresta/assets/css/style.css">
@@ -214,9 +217,6 @@
                     <span>Buyurtmalar</span>
                 </li>
                 <li class=" nav-item">
-                    <a href="/Admin/Orders/Add"><i class="bx bx-right-arrow-alt" data-icon="alerts"></i><span class="menu-item" data-i18n="Invoice">Buyurtma berish</span></a>
-                </li>
-                <li class=" nav-item">
                     <a href="/Admin/Orders/Track"><i class="bx bx-right-arrow-alt" data-icon="alerts"></i><span class="menu-title" data-i18n="Invoice">Buyurtmalarni kuzatish</span></a>
                 </li>
                 <li class=" nav-item">
@@ -259,13 +259,26 @@
                     <a href="/Admin/Settings"><i class="bx bx-right-arrow-alt" data-icon="info-alt"></i><span class="menu-title" data-i18n="Knowledge Base">Sozlamalar</span></a>
                 </li>
                 <li class=" nav-item">
-                    <a href="/Admin/Users"><i class="bx bx-right-arrow-alt" data-icon="info-alt"></i><span class="menu-title" data-i18n="Knowledge Base">Foydalanuvchilar</span></a>
+                    <a href="#"><i class="menu-livicon" data-icon="user"></i><span class="menu-title" data-i18n="User Profile">Foydalanuvchilar</span></a>
+                    <ul class="menu-content">
+                        <li>
+                            <a href="/Admin/Users"><i class="bx bx-right-arrow-alt" data-icon="info-alt"></i><span class="menu-title" data-i18n="Knowledge Base">Barcha</span></a>
+                        </li>
+                        <li>
+                            <a href="/Admin/User"><i class="bx bx-right-arrow-alt" data-icon="info-alt"></i><span class="menu-title" data-i18n="Knowledge Base">Yangi qo'shish</span></a>
+                        </li>
+                    </ul>
                 </li>
                 <li class=" nav-item">
-                    <a href="/Admin/Roles"><i class="bx bx-right-arrow-alt" data-icon="info-alt"></i><span class="menu-title" data-i18n="Knowledge Base">Rollar</span></a>
-                </li>
-                <li class=" nav-item">
-                    <a href="/Admin/Permissions"><i class="bx bx-right-arrow-alt" data-icon="info-alt"></i><span class="menu-title" data-i18n="Knowledge Base">Ruhsatlar</span></a>
+                    <a href="#"><i class="menu-livicon" data-icon="user"></i><span class="menu-title" data-i18n="User Profile">Rollar</span></a>
+                    <ul class="menu-content">
+                        <li>
+                            <a href="/Admin/Roles"><i class="bx bx-right-arrow-alt" data-icon="info-alt"></i><span class="menu-title" data-i18n="Knowledge Base">Barcha</span></a>
+                        </li>
+                        <li>
+                            <a href="/Admin/Role"><i class="bx bx-right-arrow-alt" data-icon="info-alt"></i><span class="menu-title" data-i18n="Knowledge Base">Yangi qo'shish</span></a>
+                        </li>
+                    </ul>
                 </li>
                 <li class=" navigation-header">
                     <span>Loglar</span>
@@ -301,6 +314,17 @@
     <script src="~/Scripts/Fresta/app-assets/vendors/js/extensions/swiper.min.js"></script>
     <script src="~/Scripts/Fresta/app-assets/vendors/js/tables/datatable/datatables.min.js"></script>
     <script src="~/Scripts/Fresta/app-assets/vendors/js/tables/datatable/datatables.checkboxes.min.js"></script>
+    <script src="~/Scripts/Fresta/app-assets/vendors/js/tables/datatable/dataTables.bootstrap4.min.js"></script>
+    <script src="~/Scripts/Fresta/app-assets/vendors/js/tables/datatable/dataTables.buttons.min.js"></script>
+    <script src="~/Scripts/Fresta/app-assets/vendors/js/tables/datatable/buttons.html5.min.js"></script>
+    <script src="~/Scripts/Fresta/app-assets/vendors/js/tables/datatable/buttons.print.min.js"></script>
+    <script src="~/Scripts/Fresta/app-assets/vendors/js/tables/datatable/buttons.bootstrap.min.js"></script>
+    <script src="~/Scripts/Fresta/app-assets/vendors/js/tables/datatable/pdfmake.min.js"></script>
+    <script src="~/Scripts/Fresta/app-assets/vendors/js/tables/datatable/vfs_fonts.js"></script>
+    <script src="~/Scripts/Fresta/app-assets/vendors/js/forms/select/select2.full.min.js"></script>
+    <script src="~/Scripts/Fresta/app-assets/vendors/js/forms/validation/jqBootstrapValidation.js"></script>
+    <script src="~/Scripts/Fresta/app-assets/vendors/js/pickers/pickadate/picker.js"></script>
+    <script src="~/Scripts/Fresta/app-assets/vendors/js/pickers/pickadate/picker.date.js"></script>
     <!-- END: Page Vendor JS-->
     <!-- BEGIN: Theme JS-->
     <script src="~/Scripts/Fresta/app-assets/js/scripts/configs/vertical-menu-light.js"></script>
@@ -311,6 +335,8 @@
     <!-- END: Theme JS-->
     <!-- BEGIN: Page JS-->
     <script src="~/Scripts/Fresta/app-assets/js/scripts/pages/table-extended.js"></script>
+    <script src="~/Scripts/Fresta/app-assets/js/scripts/pages/page-users.js"></script>
+    <script src="~/Scripts/Fresta/app-assets/js/scripts/navs/navs.js"></script>
     <!-- END: Page JS-->
 </body>
 <!-- END: Body-->
