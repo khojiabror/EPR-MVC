@@ -1,8 +1,5 @@
 ﻿using EPR_MVC.Models;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace EPR_MVC.Controllers
@@ -25,7 +22,7 @@ namespace EPR_MVC.Controllers
                 return View(uvm);
             }
         }
-        public ActionResult RegisterAUser()
+        public ActionResult User()
         {
             return View();
         }
