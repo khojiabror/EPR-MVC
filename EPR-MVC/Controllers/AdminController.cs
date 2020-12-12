@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EPR_MVC.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,6 +11,21 @@ namespace EPR_MVC.Controllers
     {
         // GET: Admin
         public ActionResult Index()
+        {
+            return View();
+        }
+        public ActionResult Users()
+        {
+            using (DBEPREntities db = new DBEPREntities())
+            {
+
+                UserViewModel uvm = new UserViewModel();
+                uvm.userList = db.USERS.Include("UZAUTOSUPPLIER").Where(u => u.IsDeleted == false).ToList();
+
+                return View(uvm);
+            }
+        }
+        public ActionResult RegisterAUser()
         {
             return View();
         }
