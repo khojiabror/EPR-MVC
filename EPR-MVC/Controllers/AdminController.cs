@@ -18,6 +18,7 @@ namespace EPR_MVC.Controllers
 
                 UserViewModel uvm = new UserViewModel();
                 uvm.userList = db.USERS.Include("UZAUTOSUPPLIER").Where(u => u.IsDeleted == false).ToList();
+              
 
                 return View(uvm);
             }
