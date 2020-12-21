@@ -31,6 +31,8 @@ namespace EPR_MVC.Models
         public virtual DbSet<MANUFACTURER> MANUFACTURERS { get; set; }
         public virtual DbSet<OEM> OEMS { get; set; }
         public virtual DbSet<ORDER> ORDERS { get; set; }
+        public virtual DbSet<PARTIMAGE> PARTIMAGES { get; set; }
+        public virtual DbSet<PARTNAMEPLATE> PARTNAMEPLATES { get; set; }
         public virtual DbSet<PART> PARTS { get; set; }
         public virtual DbSet<PERMISSION> PERMISSIONS { get; set; }
         public virtual DbSet<ROLE> ROLES { get; set; }
@@ -41,7 +43,5 @@ namespace EPR_MVC.Models
         public virtual DbSet<Warehouse> WAREHOUSES { get; set; }
         public virtual DbSet<WH_INS> WH_INS { get; set; }
         public virtual DbSet<WH_OUTS> WH_OUTS { get; set; }
-        public virtual DbSet<PARTIMAGE> PARTIMAGES { get; set; }
-        public virtual DbSet<PARTNAMEPLATE> PARTNAMEPLATES { get; set; }
     }
 }

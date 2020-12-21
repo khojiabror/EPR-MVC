@@ -4,23 +4,25 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ac6c87349ec24ae09fa777a88182489a" Name="Diagram1" ZoomLevel="71">
-        <EntityTypeShape EntityType="DBEPRModel.LOG" Width="1.5" PointX="8" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBEPRModel.MACHINE" Width="1.5" PointX="5.125" PointY="10.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBEPRModel.MACHINETYPE" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBEPRModel.MANUFACTURER" Width="1.5" PointX="0.5" PointY="11" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBEPRModel.OEM" Width="1.5" PointX="14.25" PointY="10.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBEPRModel.ORDER" Width="1.5" PointX="17.375" PointY="14.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBEPRModel.PART" Width="1.5" PointX="9" PointY="9.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBEPRModel.PERMISSION" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBEPRModel.ROLE" Width="1.5" PointX="3.375" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBEPRModel.SUPPLIER" Width="1.5" PointX="12" PointY="11.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBEPRModel.USER" Width="1.5" PointX="3.375" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBEPRModel.USERSIMAGE" Width="1.5" PointX="5.75" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBEPRModel.UZAUTOSUPPLIER" Width="1.5" PointX="2.875" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBEPRModel.Warehouse" Width="1.5" PointX="9.125" PointY="17.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBEPRModel.WH_INS" Width="1.5" PointX="6" PointY="18.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBEPRModel.WH_OUTS" Width="1.5" PointX="12" PointY="18.5" IsExpanded="true" />
+      <Diagram DiagramId="6e9cb7be972240a18ef2e81dc741aaa6" Name="Diagram1" ShowGrid="false">
+        <EntityTypeShape EntityType="DBEPRModel.LOG" Width="1.5" PointX="3.125" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBEPRModel.MACHINE" Width="1.5" PointX="14.5" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBEPRModel.MACHINETYPE" Width="1.5" PointX="16.375" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBEPRModel.MANUFACTURER" Width="1.5" PointX="11.25" PointY="20.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBEPRModel.OEM" Width="1.5" PointX="16.5" PointY="16.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBEPRModel.ORDER" Width="1.5" PointX="17.375" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBEPRModel.PARTIMAGE" Width="1.5" PointX="8.375" PointY="16.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBEPRModel.PARTNAMEPLATE" Width="1.5" PointX="13.375" PointY="17.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBEPRModel.PART" Width="1.5" PointX="11.25" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBEPRModel.PERMISSION" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBEPRModel.ROLE" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBEPRModel.SUPPLIER" Width="1.5" PointX="7.375" PointY="19.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBEPRModel.USER" Width="1.5" PointX="5.25" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBEPRModel.USERSIMAGE" Width="1.5" PointX="7.125" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBEPRModel.UZAUTOSUPPLIER" Width="1.5" PointX="12.875" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBEPRModel.Warehouse" Width="1.5" PointX="12.875" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBEPRModel.WH_INS" Width="1.5" PointX="10.125" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBEPRModel.WH_OUTS" Width="1.5" PointX="15.375" PointY="5.625" IsExpanded="true" />
         <AssociationConnector Association="DBEPRModel.FK_LOGS_USERS" ManuallyRouted="false" />
         <AssociationConnector Association="DBEPRModel.FK__MACHINES__TypeID__73BA3083" ManuallyRouted="false" />
         <AssociationConnector Association="DBEPRModel.FK__PARTS__MachineID__75A278F5" ManuallyRouted="false" />
@@ -33,6 +35,8 @@
         <AssociationConnector Association="DBEPRModel.FK__ORDERS__UzAutoSu__08B54D69" ManuallyRouted="false" />
         <AssociationConnector Association="DBEPRModel.FK_ORDERS_PARTS" ManuallyRouted="false" />
         <AssociationConnector Association="DBEPRModel.FK_ORDERS_USERS" ManuallyRouted="false" />
+        <AssociationConnector Association="DBEPRModel.FK_PARTIMAGES_PARTS1" ManuallyRouted="false" />
+        <AssociationConnector Association="DBEPRModel.FK_PARTIMAGES_PARTS" ManuallyRouted="false" />
         <AssociationConnector Association="DBEPRModel.FK__PARTS__supplieri__68487DD7" ManuallyRouted="false" />
         <AssociationConnector Association="DBEPRModel.FK_Parts_Uzautosuppliers" ManuallyRouted="false" />
         <AssociationConnector Association="DBEPRModel.FK_WH_INS_PARTS" ManuallyRouted="false" />
@@ -46,10 +50,6 @@
         <AssociationConnector Association="DBEPRModel.FK_WH_OUTS_WAREHOUSES" ManuallyRouted="false" />
         <AssociationConnector Association="DBEPRModel.PERMISSIONROLES" ManuallyRouted="false" />
         <AssociationConnector Association="DBEPRModel.ROLEUSERS" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="DBEPRModel.PARTIMAGE" Width="1.5" PointX="11.125" PointY="8.375" />
-        <EntityTypeShape EntityType="DBEPRModel.PARTNAMEPLATE" Width="1.5" PointX="7.25" PointY="8.375" />
-        <AssociationConnector Association="DBEPRModel.FK_PARTIMAGES_PARTS1" />
-        <AssociationConnector Association="DBEPRModel.FK_PARTIMAGES_PARTS" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

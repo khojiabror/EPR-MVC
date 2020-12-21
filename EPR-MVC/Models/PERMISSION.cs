@@ -22,8 +22,8 @@ namespace EPR_MVC.Models
     
         public int ID { get; set; }
         public string PermissionName { get; set; }
-        public string Model { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
+        public string Model { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ROLE> ROLES { get; set; }

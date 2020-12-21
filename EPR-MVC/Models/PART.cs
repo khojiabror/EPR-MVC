@@ -18,10 +18,10 @@ namespace EPR_MVC.Models
         public PART()
         {
             this.ORDERS = new HashSet<ORDER>();
-            this.WH_INS = new HashSet<WH_INS>();
-            this.WH_OUTS = new HashSet<WH_OUTS>();
             this.PARTIMAGES = new HashSet<PARTIMAGE>();
             this.PARTNAMEPLATES = new HashSet<PARTNAMEPLATE>();
+            this.WH_INS = new HashSet<WH_INS>();
+            this.WH_OUTS = new HashSet<WH_OUTS>();
         }
     
         public int ID { get; set; }
@@ -35,6 +35,7 @@ namespace EPR_MVC.Models
         public int OEMID { get; set; }
         public int MachineID { get; set; }
         public string OEMPartNumber { get; set; }
+        public string Modeli { get; set; }
         public string Type { get; set; }
         public string SerialNumber { get; set; }
         public Nullable<System.DateTime> Manufactured_Date { get; set; }
@@ -45,22 +46,21 @@ namespace EPR_MVC.Models
         public Nullable<double> Price { get; set; }
         public string Currency { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
-        public string Modeli { get; set; }
     
         public virtual MACHINE MACHINE { get; set; }
         public virtual MANUFACTURER MANUFACTURER { get; set; }
         public virtual OEM OEM { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ORDER> ORDERS { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PARTIMAGE> PARTIMAGES { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PARTNAMEPLATE> PARTNAMEPLATES { get; set; }
         public virtual SUPPLIER SUPPLIER { get; set; }
         public virtual UZAUTOSUPPLIER UZAUTOSUPPLIER { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WH_INS> WH_INS { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WH_OUTS> WH_OUTS { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PARTIMAGE> PARTIMAGES { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PARTNAMEPLATE> PARTNAMEPLATES { get; set; }
     }
 }
