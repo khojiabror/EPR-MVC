@@ -23,6 +23,5 @@ namespace EPR_MVC.Models
         //public Nullable<bool> IsOnline { get; set; }
         public int UzautosupplierID { get; set; }
         public List<USER> userList { get; set; }
-        public List<ROLE> roleList { get; set; }
     }
 }
