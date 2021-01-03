@@ -3,6 +3,7 @@
     ViewBag.Title = "Add or Edit User";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
+
 <!-- BEGIN: Content-->
 <div class="app-content content">
     <div class="content-overlay"></div>
@@ -45,7 +46,7 @@
                                     </div>
                                     <!-- users edit media object ends -->
                                     <!-- users edit account form start -->
-                                    <form id="userForm">
+                                    <form id="userForm" action="/Admin/UserSave" method="post">
                                         <div class="row">
                                             <div class="col-12 col-sm-6">
                                                 <div class="form-group">
@@ -177,9 +178,8 @@
                                                 </div>
                                             </div>
                                             <div class="col-12 d-flex flex-sm-row flex-column justify-content-end mt-1">
-                                                <button type="submit" id="saveBtn" class="btn btn-primary glow mb-1 mb-sm-0 mr-0 mr-sm-1">
-                                                    Saqlab
-                                                    qolish
+                                                <button type="submit" name="saveBtn" id="saveBtn" class="btn btn-primary glow mb-1 mb-sm-0 mr-0 mr-sm-1">
+                                                    Saqlab qolish
                                                 </button>
                                                 <button type="reset" id="btnCancel" class="btn btn-light">Bekor qilish</button>
                                             </div>
@@ -281,7 +281,7 @@
                                                         </div>
                                                     </div>*@
                                                 <div class="col-12 d-flex flex-sm-row flex-column justify-content-end mt-1">
-                                                    <button type="submit" id="saveBtn2" class="btn btn-primary glow mb-1 mb-sm-0 mr-0 mr-sm-1">
+                                                    <button type="button" id="saveBtn2" class="btn btn-primary glow mb-1 mb-sm-0 mr-0 mr-sm-1">
                                                         Saqlab
                                                         qolish
                                                     </button>
@@ -302,8 +302,9 @@
     </div>
 </div>
 <script>
+    
     $(document).ready(function () {
-        
+
         var formData = $("#userForm").serialize();
         $("saveBtn").submit(function (event) {
             $.ajax({
@@ -317,6 +318,8 @@
             })
         }
     }
+    
+
 
 </script>
 <!-- END: Content-->
