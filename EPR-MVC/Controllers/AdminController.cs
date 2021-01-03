@@ -41,21 +41,6 @@ namespace EPR_MVC.Controllers
         [HttpPost]
         public ActionResult UserSave(UserViewModel model)
         {
-            ///////////////////////////////////////////
-            string connetionString;
-            SqlConnection cnn;
-            connetionString = @"Data Source=89.236.217.150;Initial Catalog=DBEPR;User ID=EPRuser;Password=Zxcv!123";
-            cnn = new SqlConnection(connetionString);
-            cnn.Open();
-            string sql = @"INSERT INTO testtable (id,test) VALUES ('xxxx','ZZZ')";
-            using (SqlCommand cmd = new SqlCommand(sql, cnn))
-            {
-                cmd.CommandText = sql;
-                cmd.ExecuteNonQuery();
-            }
-            cnn.Close();
-            ////////////////////////////////////////////
-
             using (DBEPREntities db = new DBEPREntities())
             {
                 if (model.ID > 0)
@@ -74,7 +59,7 @@ namespace EPR_MVC.Controllers
 
                     u.Username = model.Username;
                     u.Name = model.Name;
-                    u.Password = model.Password;
+                    u.Password = "1";//model.Password;
                     u.Email = model.Email;
                     u.Status = model.Status;
                     u.UzautosupplierID = model.UzautosupplierID;
@@ -86,7 +71,7 @@ namespace EPR_MVC.Controllers
                     db.SaveChanges();
                 }
 
-                return View(model);
+                return RedirectToAction("Users");
             }
 
         }

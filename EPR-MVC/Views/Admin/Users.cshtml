@@ -68,10 +68,10 @@
                                                 <tr>
                                                     <th>korxona</th>
                                                     <th>username</th>
-                                                    <th>FISH</th>
                                                     <th>kalit so'zi</th>
-                                                    <th>roli</th>
+                                                    <th>FISH</th>
                                                     <th>status</th>
+                                                    <th>roli</th>
                                                     <th>bo'linmasi</th>
                                                     <th>lavozimi</th>
                                                     <th>telefon</th>
@@ -81,25 +81,27 @@
                                             <tbody>
                                                 @foreach (var user in Model.userList)
                                                 {
-                                                    <tr>
-                                                        <td>@user.UZAUTOSUPPLIER.Name</td>
-                                                        <td>@user.Username </td>
-                                                        <td>@user.Password </td>
-                                                        <td>@user.Name </td>
-                                                        @if (user.Status == true)
-                                                        {
-                                                            <td class="text-success">Faoliyatda</td>
-                                                        }
-                                                        else
-                                                        {
-                                                            <td class="text-danger">Ishlamayabdi</td>
-                                                        }
-                                                        <td>@user.Department </td>
-                                                        <td>@user.JobTitle </td>
-                                                        <td>@user.Telephone</td>
-                                                    </tr>
-                                                }
                                                 <tr>
+                                                    <td>@user.UZAUTOSUPPLIER.Name</td>
+                                                    <td>@user.Username </td>
+                                                    <td>@user.Password </td>
+                                                    <td>@user.Name </td>
+                                                    @if (user.Status == true)
+                                                    {
+                                                        <td class="badge badge-light-success">Faoliyatda</td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td class="badge badge-light-danger">Ishlamayabdi</td>
+                                                    }
+                                                    <td></td>
+                                                    <td>@user.Department </td>
+                                                    <td>@user.JobTitle </td>
+                                                    <td>@user.Telephone</td>
+                                                    <td><a href="/UserAE"><i class="bx bx-edit-alt"></i></a></td>
+                                                </tr>
+                                                }
+                                                @*<tr>
                                                     <td>UzAutoAustem</td>
                                                     <td>dean3004</td>
                                                     <td>Dean Stanley</td>
@@ -110,7 +112,7 @@
                                                     <td>Injener</td>
                                                     <td>+998911600794</td>
                                                     <td><a href="../../../html/ltr/vertical-menu-template/page-users-edit.html"><i class="bx bx-edit-alt"></i></a></td>
-                                                </tr>
+                                                </tr>*@
                                             </tbody>
                                         </table>
                                     </div>
