@@ -4,7 +4,7 @@
 </head>
 
 <div>
-    <form id="modal2Form">
+    <form id="modal2Form" > 
         @Html.HiddenFor(model => model.ID)
         <label>Kod: </label>
         @Html.TextBoxFor(model => model.Code, new { @class = "form-control", @placeholder = "Kod" })
@@ -57,22 +57,27 @@
     <span class="d-none d-sm-block">Save</span>
 </a>
 <script>
+    
     $(document).ready(function () {
         $("#btnSubmit").click(function () {
+           
             var formData = $("#modal2Form").serialize();
+
+           // document.writeln(formData);
+
             $.ajax({
                 type: "POST",
                 url: "/Database/PartsSave",
-                contentType: 'application/json',
-                data: { model: formData },
+                contentType: 'json',
+                data: formData,
                 success: function () {
                     $("#full-scrn").modal("hide");
                     window.location.href = "/Database/Parts";
                 }
             })
-
-
+            
         })
+
         $("#btnCancel").click(function () {
             $("#full-scrn").modal("hide");
         })
